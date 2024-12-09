@@ -5,14 +5,12 @@ const prisma = new PrismaClient();
 
 export class UserService {
   static async signUp({ username, email, password }: Pick<User, 'username' | 'email' | 'password'>) {
-    const hashPassword = makeHash(password);
-    const randomCode = makeRandomCode();
     return await prisma.user.create({
       data: {
         username,
         email,
-        randomCode,
-        password: hashPassword,
+        password,
+        randomCode: makeRandomCode(),
       },
     });
   }
@@ -29,5 +27,21 @@ export class UserService {
 
   static async deleteAllUsers() {
     await prisma.user.deleteMany();
+  }
+
+  static async findUserByEmail(email: string) {
+    return await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+  }
+
+  static async findUser(filter: Partial<User>) {
+    return await prisma.user.findFirst({
+      where: {
+        ...filter,
+      },
+    });
   }
 }

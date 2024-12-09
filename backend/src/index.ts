@@ -5,8 +5,7 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { corsOptions } from '@/configs';
 import path from 'path';
-import authRouter from './routes/auth';
-import { UserService } from './services';
+import {authRouter} from '@/routes';
 
 const app = express();
 
