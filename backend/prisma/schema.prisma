@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int          @id @default(autoincrement())
+  username   String
+  email      String       @unique
+  password   String
+  randomCode String       @unique
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  connectionsAsUser   Connection[] @relation("UserAsUser")
+  connectionsAsFriend Connection[] @relation("UserAsFriend")
+
+  chatRoomsAsUser   ChatRoom[] @relation("UserChatRooms")
+  chatRoomsAsFriend ChatRoom[] @relation("ChatRoomFriends")
+
+  activities Activity[]
+}
+
+model Connection {
+  id       Int @id @default(autoincrement())
+  userId   Int
+  friendId Int
+
+  user   User @relation("UserAsUser", fields: [userId], references: [id])
+  friend User @relation("UserAsFriend", fields: [friendId], references: [id])
+}
+
+model ChatRoom {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  friendId  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User @relation("UserChatRooms", fields: [userId], references: [id])
+  friend User @relation("ChatRoomFriends", fields: [friendId], references: [id])
+}
+
+model Activity {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  createdAt   DateTime  @default(now())
+  endAt       DateTime
+  userId      Int
+
+  user   User    @relation(fields: [userId], references: [id])
+  images Image[]
+  icon   Icon?
+
+  @@index([userId])
+}
+
+model Image {
+  id         Int      @id @default(autoincrement())
+  imageUrl   String
+  order      String
+  activityId Int
+  createdAt  DateTime @default(now())
+
+  activity Activity @relation(fields: [activityId], references: [id])
+  
+  @@index([activityId])
+}
+
+model Icon {
+  id         Int      @id @default(autoincrement())
+  iconUrl    String
+  activityId Int       @unique
+  createdAt  DateTime  @default(now())
+
+  activity Activity @relation(fields: [activityId], references: [id])
+
+  @@index([activityId])
+}
