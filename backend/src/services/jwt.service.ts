@@ -1,4 +1,4 @@
-import jwt, { Jwt, JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 type JWTKeyType = 'REFRESH' | 'ACCESS';
 

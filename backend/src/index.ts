@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import { corsOptions } from '@/configs';
 import path from 'path';
 import {authRouter} from '@/routes';
+import { jwtRouter } from './routes/jwt.router';
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use(authRouter);
+app.use(jwtRouter);
 
 app.use((err: any, req: Request, res: Response, next: Function) => {
   console.error(err.stack);
