@@ -17,7 +17,7 @@ interface InputProps extends NativeInputProps {
 export const Input = ({ label, register, error, ...props }: InputProps) => {
   return (
     <Container>
-      <BMJua.Body color={COLORS.GRAY500} style={{ paddingLeft: '2px' }}>
+      <BMJua.Body color={COLORS.BLACK500} style={{ paddingLeft: '2px' }}>
         {label}
       </BMJua.Body>
       <InputStyle {...props} {...register} />
