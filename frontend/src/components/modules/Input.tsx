@@ -10,7 +10,7 @@ type NativeInputProps = React.DetailedHTMLProps<
 
 interface InputProps extends NativeInputProps {
   label: string
-  register: UseFormRegisterReturn<'email' | 'password'>
+  register: UseFormRegisterReturn<string>
   error?: string
 }
 

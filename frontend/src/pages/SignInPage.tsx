@@ -19,14 +19,14 @@ export const SignInPage = () => {
           label='이메일'
           placeholder='이메일을 입력해주세요.'
           register={register('email')}
-          error={errors.email && errors.email.message}
+          error={errors?.email?.message}
         />
         <Input
           label='비밀번호'
           type='password'
           placeholder='비밀번호를 입력해주세요.'
           register={register('password')}
-          error={errors.password && errors.password.message}
+          error={errors?.password?.message}
         />
       </S.Form>
       <Button type='submit' onClick={handleSubmit(onSubmit)}>
@@ -34,7 +34,7 @@ export const SignInPage = () => {
       </Button>
       <S.NavLinks>
         <NavLink to='/sign-up'>회원가입 하기</NavLink>
-        <NavLink to='/sign-up'>비밀번호 찾기</NavLink>
+        <NavLink to='/find-password'>비밀번호 찾기</NavLink>
       </S.NavLinks>
     </S.Container>
   )

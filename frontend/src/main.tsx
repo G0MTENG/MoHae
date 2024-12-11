@@ -2,7 +2,7 @@ import './index.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { NotFoundPage, SplashPage, HomePage, SignInPage, SignUpPage } from '@/pages'
+import { NotFoundPage, SplashPage, HomePage, SignInPage, SignUpPage, FindPassword } from '@/pages'
 import styled from 'styled-components'
 
 const ApplicationContainer = styled.div`
@@ -11,6 +11,8 @@ const ApplicationContainer = styled.div`
   min-width: 320px;
   max-width: 600px;
   height: 100vh;
+
+  overflow-y: auto;
 
   border: 1px solid #bcbbb5;
 `
@@ -36,6 +38,7 @@ async function enableMocking() {
             <Route path='/' element={<SplashPage />} />
             <Route path='/sign-in' element={<SignInPage />} />
             <Route path='/sign-up' element={<SignUpPage />} />
+            <Route path='/find-password' element={<FindPassword />} />
             <Route path='/home' element={<HomePage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Routes>
