@@ -1,5 +1,5 @@
 import { signIn, signUp } from '@/apis/auth'
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/constants'
+import { ACCESS_TOKEN, REFRESH_TOKEN, ROUTES } from '@/constants'
 import { MutationOptions } from '@/types'
 import { SignInRequest, SignInResponse, SignUpRequest, SignUpResponse } from '@/types'
 import { useMutation } from '@tanstack/react-query'
@@ -13,7 +13,7 @@ export const useSignIn = (mutateOptions?: MutationOptions<SignInResponse, SignIn
     onSuccess(data) {
       localStorage.setItem(ACCESS_TOKEN, data.accessToken)
       localStorage.setItem(REFRESH_TOKEN, data.refreshToken)
-      navigator('/home')
+      navigator(ROUTES.MAIN.HOME)
     },
     ...mutateOptions,
   })
@@ -25,7 +25,7 @@ export const useSignUp = (mutateOptions?: MutationOptions<SignUpResponse, SignUp
   return useMutation({
     mutationFn: signUp,
     onSuccess() {
-      navigator('/sign-in')
+      navigator(ROUTES.AUTH.SIGN_IN)
     },
     ...mutateOptions,
   })
