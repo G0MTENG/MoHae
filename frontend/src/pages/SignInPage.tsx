@@ -1,7 +1,7 @@
 import { Title } from '@/components/atoms'
 import * as S from './SignInPage.styled'
 import { Button, Input, NavLink } from '@/components/modules'
-import { useSignIn } from '@/hooks'
+import { useSignInForm } from '@/hooks'
 
 export const SignInPage = () => {
   const {
@@ -9,7 +9,7 @@ export const SignInPage = () => {
     handleSubmit,
     onSubmit,
     formState: { errors },
-  } = useSignIn()
+  } = useSignInForm()
 
   return (
     <S.Container>
@@ -17,6 +17,7 @@ export const SignInPage = () => {
       <S.Form>
         <Input
           label='이메일'
+          type='email'
           placeholder='이메일을 입력해주세요.'
           register={register('email')}
           error={errors?.email?.message}

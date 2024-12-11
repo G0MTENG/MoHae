@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { NotFoundPage, SplashPage, HomePage, SignInPage, SignUpPage, FindPassword } from '@/pages'
 import styled from 'styled-components'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const ApplicationContainer = styled.div`
   margin: 0 auto;
@@ -17,33 +18,35 @@ const ApplicationContainer = styled.div`
   border: 1px solid #bcbbb5;
 `
 
-async function enableMocking() {
-  if (!import.meta.env.DEV) {
-    return
-  }
+// async function enableMocking() {
+//   if (!import.meta.env.DEV) {
+//     return
+//   }
 
-  const { worker } = await import('./mocks/browser')
+//   const { worker } = await import('./mocks/browser')
 
-  return worker.start()
-}
+//   return worker.start()
+// }
 
 ;(async () => {
-  await enableMocking()
+  // await enableMocking()
 
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
-      <ApplicationContainer>
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<SplashPage />} />
-            <Route path='/sign-in' element={<SignInPage />} />
-            <Route path='/sign-up' element={<SignUpPage />} />
-            <Route path='/find-password' element={<FindPassword />} />
-            <Route path='/home' element={<HomePage />} />
-            <Route path='*' element={<NotFoundPage />} />
-          </Routes>
-        </BrowserRouter>
-      </ApplicationContainer>
+      <QueryClientProvider client={new QueryClient()}>
+        <ApplicationContainer>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<SplashPage />} />
+              <Route path='/sign-in' element={<SignInPage />} />
+              <Route path='/sign-up' element={<SignUpPage />} />
+              <Route path='/find-password' element={<FindPassword />} />
+              <Route path='/home' element={<HomePage />} />
+              <Route path='*' element={<NotFoundPage />} />
+            </Routes>
+          </BrowserRouter>
+        </ApplicationContainer>
+      </QueryClientProvider>
     </StrictMode>,
   )
 })()

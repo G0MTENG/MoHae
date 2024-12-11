@@ -5,8 +5,8 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { corsOptions } from '@/configs';
 import path from 'path';
-import {authRouter} from '@/routes';
-import { jwtRouter } from './routes/jwt.router';
+import { authRouter, jwtRouter, debugRouter } from '@/routes';
+
 
 const app = express();
 
@@ -22,6 +22,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello World');
 });
 
+app.use(debugRouter);
 app.use(authRouter);
 app.use(jwtRouter);
 

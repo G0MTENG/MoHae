@@ -1,4 +1,4 @@
-import { makeHash, makeRandomCode } from "@/utils";
+import { makeRandomCode } from "@/utils";
 import { PrismaClient, User } from "@prisma/client";
 
 const prisma = new PrismaClient();
