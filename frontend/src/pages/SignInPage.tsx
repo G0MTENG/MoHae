@@ -2,6 +2,7 @@ import { Title } from '@/components/atoms'
 import * as S from './SignInPage.styled'
 import { Button, Input, NavLink } from '@/components/modules'
 import { useSignInForm } from '@/hooks'
+import { ROUTES } from '@/constants'
 
 export const SignInPage = () => {
   const {
@@ -34,8 +35,8 @@ export const SignInPage = () => {
         로그인
       </Button>
       <S.NavLinks>
-        <NavLink to='/sign-up'>회원가입 하기</NavLink>
-        <NavLink to='/find-password'>비밀번호 찾기</NavLink>
+        <NavLink to={ROUTES.AUTH.SIGN_UP}>회원가입 하기</NavLink>
+        <NavLink to={ROUTES.AUTH.FIND_PASSWORD}>비밀번호 찾기</NavLink>
       </S.NavLinks>
     </S.Container>
   )

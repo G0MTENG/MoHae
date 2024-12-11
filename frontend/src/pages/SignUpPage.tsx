@@ -2,6 +2,7 @@ import { Button, Input, NavLink } from '@/components/modules'
 import * as S from './SignUpPage.styled'
 import { Title } from '@/components/atoms'
 import { useSignUpForm } from '@/hooks'
+import { ROUTES } from '@/constants'
 
 export const SignUpPage = () => {
   const {
@@ -47,7 +48,7 @@ export const SignUpPage = () => {
       <Button type='submit' onClick={handleSubmit(onSubmit)}>
         회원가입
       </Button>
-      <NavLink to='/sign-in'>로그인하러 하기</NavLink>
+      <NavLink to={ROUTES.AUTH.SIGN_IN}>로그인하러 하기</NavLink>
     </S.Container>
   )
 }
