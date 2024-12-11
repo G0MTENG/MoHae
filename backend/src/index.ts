@@ -1,10 +1,12 @@
 import helmet from 'helmet'
 import cors from 'cors'
-import express, { Request, Response } from 'express';
+import express, { Request, response, Response } from 'express';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import { corsOptions } from './configs';
+import { corsOptions } from '@/configs';
 import path from 'path';
+import { authRouter, jwtRouter, debugRouter } from '@/routes';
+
 
 const app = express();
 
@@ -18,6 +20,15 @@ app.use(cookieParser());
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World');
+});
+
+app.use(debugRouter);
+app.use(authRouter);
+app.use(jwtRouter);
+
+app.use((err: any, req: Request, res: Response, next: Function) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
 app.listen(3000, () => {
