@@ -1,0 +1,16 @@
+export const COLORS = Object.freeze({
+  BLACK: '#000000',
+  WHITE: '#FFFFFF',
+  BLACK500: '#090A0A',
+  BLACK400: '#303437',
+  BLACK300: '#404446',
+  BLACK200: '#6C7072',
+  BLACK100: '#72777A',
+  GRAY500: '#979C9E',
+  GRAY400: '#CDCFD0',
+  GRAY300: '#EEEEEE',
+  GRAY200: '#F2F4F5',
+  GRAY100: '#F7F9FA',
+  YELLOW500: '#FFB400',
+  RED500: '#D3180C',
+} as const)
