@@ -1,20 +1,20 @@
 import styled from 'styled-components'
 import { BMJua } from '../atoms'
 import { COLORS } from '@/constants'
-import { UseFormRegisterReturn } from 'react-hook-form'
+import { FieldValues, UseFormRegister } from 'react-hook-form'
 
 type NativeInputProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >
 
-interface InputProps extends NativeInputProps {
+interface InputProps<T extends FieldValues> extends NativeInputProps {
   label: string
-  register: UseFormRegisterReturn<string>
+  register: UseFormRegister<T>
   error?: string
 }
 
-export const Input = ({ label, register, error, ...props }: InputProps) => {
+export function Input<T extends FieldValues>({ label, register, error, ...props }: InputProps<T>) {
   return (
     <Container>
       <BMJua.Body color={COLORS.BLACK500} style={{ paddingLeft: '2px' }}>

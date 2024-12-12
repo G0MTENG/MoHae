@@ -26,10 +26,10 @@ export const Router = () => {
           <Route index element={<HomePage />} />
           <Route path={ROUTES.MAIN.HOME} element={<HomePage />} />
           <Route path={ROUTES.MAIN.ARCHIVE} element={<ArchivePage />} />
-          <Route path={ROUTES.MAIN.ADD} element={<AddPage />} />
           <Route path={ROUTES.MAIN.FRIENDS} element={<FriendsPage />} />
           <Route path={ROUTES.MAIN.SETTINGS} element={<SettingsPage />} />
         </Route>
+        <Route path={ROUTES.ADD} element={<AddPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

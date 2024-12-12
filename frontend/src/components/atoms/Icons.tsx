@@ -1,6 +1,6 @@
 import { AiFillHome } from 'react-icons/ai'
 import { MdArchive, MdOutlineGroups, MdOutlineSettings } from 'react-icons/md'
-import { FaPlusCircle } from 'react-icons/fa'
+import { FaPlusCircle, FaChevronLeft } from 'react-icons/fa'
 
 export const Icons = Object.freeze({
   HOME: AiFillHome,
@@ -8,4 +8,5 @@ export const Icons = Object.freeze({
   PLUS_FILLED: FaPlusCircle,
   FRIENDS: MdOutlineGroups,
   SETTINGS: MdOutlineSettings,
+  ARROW_LEFT: FaChevronLeft,
 } as const)

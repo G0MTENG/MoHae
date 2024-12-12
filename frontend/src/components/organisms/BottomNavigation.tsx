@@ -24,7 +24,7 @@ export const BottomNavigation = () => {
       <ul>
         <NavBlock icon='HOME' title='홈' to={ROUTES.MAIN.HOME} />
         <NavBlock icon='ARCHIVE' title='기록' to={ROUTES.MAIN.ARCHIVE} />
-        <AddBlock to={ROUTES.MAIN.ADD} />
+        <AddBlock to={ROUTES.ADD} />
         <NavBlock icon='FRIENDS' title='친구' to={ROUTES.MAIN.FRIENDS} />
         <NavBlock icon='SETTINGS' title='설정' to={ROUTES.MAIN.SETTINGS} />
       </ul>
