@@ -2,18 +2,30 @@ import { CreateActivitySchema } from '@/schemas/activity'
 import type { CreateActivitySchemaType } from '@/types/activity'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { useCreateActivity } from './queries/useActivity'
 
-export const useCreateActivity = () => {
+export const useActivityForm = () => {
+  const { mutate } = useCreateActivity()
   const formProps = useForm<CreateActivitySchemaType>({
     resolver: zodResolver(CreateActivitySchema),
     defaultValues: {
       emoji: '😀',
-      photos: [],
+      images: [],
     },
   })
 
   const onSubmit = (data: CreateActivitySchemaType) => {
-    console.log(data)
+    const formData = new FormData()
+
+    formData.append('title', data.title)
+    formData.append('description', data.description ?? '')
+    formData.append('emoji', data.emoji)
+
+    data.images.forEach((image) => {
+      formData.append('images', image)
+    })
+
+    mutate(formData)
   }
 
   return {

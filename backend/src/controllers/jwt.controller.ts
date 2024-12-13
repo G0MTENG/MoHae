@@ -58,8 +58,6 @@ export const JWTController = {
         throw new Error('JWT ERROR: 유효하지 않은 토큰입니다.')
       }
 
-      console.log(decoded)
-
       if (typeof decoded === 'string' || !('id' in decoded || 'name' in decoded)) {
         throw new Error('JWT ERROR: decoded 타입가드 에러입니다.')
       }

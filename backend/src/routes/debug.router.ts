@@ -12,5 +12,13 @@ router
     res.send(users);
     return 
   })
+  .get('/activities', async (req: Request, res: Response) => {
+    const activities = await prisma.activity.findMany({
+      include: { images: true },
+    });
+
+    res.send(activities);
+    return 
+  })
 
 export const debugRouter = router;

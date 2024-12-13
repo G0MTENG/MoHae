@@ -4,6 +4,19 @@ import { PrismaClient, User } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class UserService {
+  static async info(id: number) {
+    return await prisma.user.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        username: true,
+        randomCode: true,
+      }
+    });
+  }
+
   static async signUp({ username, email, password }: Pick<User, 'username' | 'email' | 'password'>) {
     return await prisma.user.create({
       data: {

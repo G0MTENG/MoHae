@@ -18,18 +18,27 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {/* 루트 페이지 */}
         <Route path={ROUTES.ROOT} element={<SplashPage />} />
+
+        {/* 인증 페이지 */}
         <Route path={ROUTES.AUTH.SIGN_IN} element={<SignInPage />} />
         <Route path={ROUTES.AUTH.SIGN_UP} element={<SignUpPage />} />
         <Route path={ROUTES.AUTH.FIND_PASSWORD} element={<FindPassword />} />
+
+        {/* 메인 페이지 (중첩 라우팅) */}
         <Route path={ROUTES.MAIN.ROOT} element={<MainTemplate />}>
-          <Route index element={<HomePage />} />
-          <Route path={ROUTES.MAIN.HOME} element={<HomePage />} />
-          <Route path={ROUTES.MAIN.ARCHIVE} element={<ArchivePage />} />
-          <Route path={ROUTES.MAIN.FRIENDS} element={<FriendsPage />} />
-          <Route path={ROUTES.MAIN.SETTINGS} element={<SettingsPage />} />
+          <Route index element={<HomePage />} /> {/* /main */}
+          <Route path={ROUTES.MAIN.HOME} element={<HomePage />} /> {/* /main/home */}
+          <Route path={ROUTES.MAIN.ARCHIVE} element={<ArchivePage />} /> {/* /main/archive */}
+          <Route path={ROUTES.MAIN.FRIENDS} element={<FriendsPage />} /> {/* /main/friends */}
+          <Route path={ROUTES.MAIN.SETTINGS} element={<SettingsPage />} /> {/* /main/settings */}
         </Route>
+
+        {/* 추가 페이지 */}
         <Route path={ROUTES.ADD} element={<AddPage />} />
+
+        {/* 404 Not Found */}
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

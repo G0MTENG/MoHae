@@ -4,7 +4,7 @@ import { Header } from '@/components/atoms/Header'
 import { IconButton, TextButton, Input } from '@/components/modules'
 import { PhotoInput, EmojiInput } from '@/components/organisms'
 import { COLORS } from '@/constants'
-import { useCreateActivity } from '@/hooks/useCreateActivity'
+import { useActivityForm } from '@/hooks'
 import { useNavigate } from 'react-router-dom'
 
 export const AddPage = () => {
@@ -16,7 +16,7 @@ export const AddPage = () => {
     handleSubmit,
     onSubmit,
     formState: { errors },
-  } = useCreateActivity()
+  } = useActivityForm()
 
   return (
     <>
@@ -35,21 +35,21 @@ export const AddPage = () => {
         <Input
           label='현재 활동'
           placeholder='현재 무엇을 하고 계신가요?'
-          register={register}
-          error={errors?.activity?.message}
+          register={register('title')}
+          error={errors?.title?.message}
         />
         <Input
           label='내용'
           placeholder='내용을 입력해주세요. [선택]'
-          register={register}
-          error={errors?.content?.message}
+          register={register('description')}
+          error={errors?.description?.message}
         />
         <EmojiInput watch={watch} setValue={setValue} />
         <PhotoInput
           watch={watch}
           register={register}
           setValue={setValue}
-          error={errors?.photos?.message}
+          error={errors?.images?.message}
         />
       </S.Container>
     </>

@@ -41,10 +41,10 @@ export const ImageInput = ({ register, setValue }: ImageInputProps) => {
         type='file'
         multiple
         accept='image/*'
-        {...register('photos', {
+        {...register('images', {
           onChange: (e) => {
             const files = Array.from(e.target.files ?? []) as File[]
-            setValue('photos', files)
+            setValue('images', files)
           },
         })}
       />

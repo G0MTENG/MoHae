@@ -27,7 +27,7 @@ export const NavBlock = ({ icon, title, ...props }: NavBlockProps) => {
   const Icon = Icons[icon]
 
   return (
-    <Block $active={locaion.pathname === props.to} {...props}>
+    <Block $active={locaion.pathname.endsWith(props.to as string)} {...props}>
       <Icon size={24} />
       <BMJua.Caption>{title}</BMJua.Caption>
     </Block>

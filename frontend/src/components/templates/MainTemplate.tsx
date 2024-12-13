@@ -1,10 +1,10 @@
-import { PropsWithChildren } from 'react'
 import { BottomNavigation } from '../organisms'
+import { Outlet } from 'react-router-dom'
 
-export const MainTemplate = ({ children }: PropsWithChildren) => {
+export const MainTemplate = () => {
   return (
     <div>
-      <main>{children}</main>
+      <Outlet />
       <BottomNavigation />
     </div>
   )

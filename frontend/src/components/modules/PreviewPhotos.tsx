@@ -10,7 +10,7 @@ interface PreviewPhotosProps {
 export const PrewviewPhotos = ({ photos, setValue }: PreviewPhotosProps) => {
   const onDelete = (index: number) => {
     const filertedPhotos = photos.filter((_, photoNumber) => photoNumber !== index)
-    setValue('photos', filertedPhotos)
+    setValue('images', filertedPhotos)
   }
 
   return (

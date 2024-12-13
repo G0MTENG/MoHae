@@ -25,7 +25,7 @@ const Previews = styled.div`
 `
 
 export const PhotoInput = ({ watch, register, setValue, error }: PhotoInputProps) => {
-  const photos = watch('photos') || []
+  const photos = watch('images') || []
 
   return (
     <Container>

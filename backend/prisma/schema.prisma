@@ -55,13 +55,13 @@ model Activity {
   id          Int       @id @default(autoincrement())
   title       String
   description String?
+  emoji       String
   createdAt   DateTime  @default(now())
-  endAt       DateTime
+  endAt       DateTime?
   userId      Int
 
   user   User    @relation(fields: [userId], references: [id])
   images Image[]
-  icon   Icon?
 
   @@index([userId])
 }
@@ -69,22 +69,11 @@ model Activity {
 model Image {
   id         Int      @id @default(autoincrement())
   imageUrl   String
-  order      String
+  order      Int
   activityId Int
   createdAt  DateTime @default(now())
 
   activity Activity @relation(fields: [activityId], references: [id])
   
-  @@index([activityId])
-}
-
-model Icon {
-  id         Int      @id @default(autoincrement())
-  iconUrl    String
-  activityId Int       @unique
-  createdAt  DateTime  @default(now())
-
-  activity Activity @relation(fields: [activityId], references: [id])
-
   @@index([activityId])
 }

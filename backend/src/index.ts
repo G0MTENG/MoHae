@@ -1,12 +1,11 @@
 import helmet from 'helmet'
 import cors from 'cors'
-import express, { Request, response, Response } from 'express';
+import express, { Request, Response } from 'express';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { corsOptions } from '@/configs';
 import path from 'path';
-import { authRouter, jwtRouter, debugRouter } from '@/routes';
-
+import { authRouter, jwtRouter, debugRouter, activityRouter, userRouter } from '@/routes';
 
 const app = express();
 
@@ -25,6 +24,8 @@ app.get('/', (req: Request, res: Response) => {
 app.use(debugRouter);
 app.use(authRouter);
 app.use(jwtRouter);
+app.use(userRouter);
+app.use('/activity', activityRouter)
 
 app.use((err: any, req: Request, res: Response, next: Function) => {
   console.error(err.stack);

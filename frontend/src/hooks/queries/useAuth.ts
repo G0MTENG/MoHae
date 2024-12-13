@@ -13,7 +13,7 @@ export const useSignIn = (mutateOptions?: MutationOptions<SignInResponse, SignIn
     onSuccess(data) {
       localStorage.setItem(ACCESS_TOKEN, data.accessToken)
       localStorage.setItem(REFRESH_TOKEN, data.refreshToken)
-      navigator(ROUTES.MAIN.HOME)
+      navigator('/main/home')
     },
     ...mutateOptions,
   })

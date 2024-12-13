@@ -8,9 +8,10 @@ export const ROUTES = Object.freeze({
   },
   MAIN: {
     ROOT: '/main',
-    HOME: '/main/home',
-    ARCHIVE: '/main/archive',
-    FRIENDS: '/main/friends',
-    SETTINGS: '/main/settings',
+    HOME: 'home', // 상대 경로
+    ARCHIVE: 'archive', // 상대 경로
+    FRIENDS: 'friends', // 상대 경로
+    SETTINGS: 'settings', // 상대 경로
   },
+  SEND: '/send',
 } as const)
