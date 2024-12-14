@@ -11,7 +11,13 @@ export const JWTController = {
 
       const refreshToken = authorization.split('Bearer ')[1];
 
+      console.group('refreshToken')
+      console.log(refreshToken)
+
       const decoded = JWTService.verifyToken(refreshToken, 'REFRESH');
+
+      console.log(decoded)
+      console.groupEnd()
       
       if (!decoded) {
         throw new Error('유효하지 않은 토큰입니다.');

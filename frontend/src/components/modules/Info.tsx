@@ -3,14 +3,14 @@ import { BMJua, Favicon } from '../atoms'
 import { PropsWithChildren } from 'react'
 
 const Container = styled.div`
-  margin: 0 auto;
+  margin: 16px auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
 `
 
-export const Error = ({ children }: PropsWithChildren) => {
+export const Info = ({ children }: PropsWithChildren) => {
   return (
     <Container>
       <Favicon />

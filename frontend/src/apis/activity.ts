@@ -24,7 +24,7 @@ export const fetchRecentActivity = async () => {
   return response.data
 }
 
-export const fetchListActivity = async (date: string) => {
+export const fetchActivityList = async (date: string) => {
   const response = await api.get<FetchListActivityResponse>('/activity', {
     params: {
       date,

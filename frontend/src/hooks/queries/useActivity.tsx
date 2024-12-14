@@ -1,5 +1,10 @@
-import { createActivity, fetchRecentActivity } from '@/apis'
-import { CreateActivityResponse, FetchRecentActivityResponse, MutationOptions } from '@/types'
+import { createActivity, fetchActivityList, fetchRecentActivity } from '@/apis'
+import {
+  CreateActivityResponse,
+  FetchListActivityResponse,
+  FetchRecentActivityResponse,
+  MutationOptions,
+} from '@/types'
 import { QueryOptions, useMutation, useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,6 +28,17 @@ export const useFetchRecentActivity = (
   return useQuery({
     queryKey: ['main', 'recent'],
     queryFn: fetchRecentActivity,
+    ...queryOptions,
+  })
+}
+
+export const useFetchActivityList = (
+  date: string,
+  queryOptions?: QueryOptions<FetchListActivityResponse>,
+) => {
+  return useQuery({
+    queryKey: ['main', 'list', date],
+    queryFn: () => fetchActivityList(date),
     ...queryOptions,
   })
 }
