@@ -35,6 +35,10 @@ export const fetchActivityList = async (date: string) => {
 }
 
 export const fetchDetailActivity = async (id: number) => {
+  if (isNaN(id)) {
+    return null
+  }
+
   const response = await api.get<FetchDetailActivityResponse>(`/activity/${id}`)
 
   return response.data

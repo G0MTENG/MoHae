@@ -12,6 +12,7 @@ export class UserService {
       select: {
         id: true,
         username: true,
+        avatar: true,
         randomCode: true,
       }
     });
@@ -50,10 +51,13 @@ export class UserService {
     });
   }
 
-  static async findUser(filter: Partial<User>) {
+  static async findUser(filter: Pick<User, 'id' | 'username'>) {
     return await prisma.user.findFirst({
       where: {
-        ...filter,
+        AND: [
+          { id: filter.id },
+          { username: filter.username }
+        ]
       },
     });
   }

@@ -22,18 +22,23 @@ api.interceptors.response.use(
   },
   async (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('accessToken')
+      localStorage.removeItem(ACCESS_TOKEN)
 
       const refreshToken = localStorage.getItem(REFRESH_TOKEN)
       if (refreshToken) {
         try {
           const {
             data: { accessToken },
-          } = await api.post('/refresh', { refreshToken })
+          } = await api.post(
+            '/refresh',
+            {},
+            { headers: { Authorization: `Bearer ${refreshToken}` } },
+          )
 
-          localStorage.setItem('accessToken', accessToken)
+          localStorage.setItem(ACCESS_TOKEN, accessToken)
 
           error.config.headers['Authorization'] = `Bearer ${accessToken}`
+          api.defaults.headers['Authorization'] = `Bearer ${accessToken}`
           return api.request(error.config)
         } catch (refreshError) {
           localStorage.removeItem(REFRESH_TOKEN)

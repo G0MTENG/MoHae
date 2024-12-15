@@ -12,10 +12,6 @@ const Container = styled.div`
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `
 
 const EmojiContainer = styled.div`

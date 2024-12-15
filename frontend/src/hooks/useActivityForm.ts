@@ -1,4 +1,4 @@
-import { CreateActivitySchema } from '@/schemas/activity'
+import { CreateActivitySchema } from '@/schemas'
 import type { CreateActivitySchemaType } from '@/types/activity'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'

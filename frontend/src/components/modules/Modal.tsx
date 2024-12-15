@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 interface ModalProps {
   close: VoidFunction
+  height?: string
 }
 
 const Background = styled.div`
@@ -16,9 +17,9 @@ const Background = styled.div`
   z-index: 100;
 `
 
-const Content = styled.div`
+const Content = styled.div<Pick<ModalProps, 'height'>>`
   width: 80%;
-  height: 80%;
+  height: ${(props) => props.height};
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -32,14 +33,16 @@ const Content = styled.div`
   border-radius: 8px;
 `
 
-export const Modal = ({ close, children }: PropsWithChildren<ModalProps>) => {
+export const Modal = ({ close, height, children }: PropsWithChildren<ModalProps>) => {
   const handleStopPropagation = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation()
   }
 
   return (
     <Background onClick={close}>
-      <Content onClick={handleStopPropagation}>{children}</Content>
+      <Content height={height} onClick={handleStopPropagation}>
+        {children}
+      </Content>
     </Background>
   )
 }

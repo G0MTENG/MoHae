@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { BMJua, Emoji } from '../atoms'
 import { COLORS } from '@/constants'
 import { ImageSlider } from '../modules/ImageSlider'
+import { Info } from '../modules'
 
 const Container = styled.div`
   width: 100%;
@@ -39,7 +40,7 @@ export const RecentActivityView = () => {
   const { data: userInfo } = useFetchUserInfo()
 
   if (!recentActivity || !userInfo) {
-    return
+    return <Info>{'최근 활동이 없습니다.\n활동을 추가해보세요!'}</Info>
   }
 
   const { username } = userInfo
@@ -55,7 +56,7 @@ export const RecentActivityView = () => {
           <BMJua.H5>{title}</BMJua.H5>
           <Emoji>{emoji}</Emoji>
         </TitleNEmoji>
-        <BMJua.Body color={COLORS.GRAY500}>{description}</BMJua.Body>
+        <BMJua.Body>{description}</BMJua.Body>
       </ActivityContainer>
     </Container>
   )

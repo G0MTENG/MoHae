@@ -1,5 +1,15 @@
 import { parseImageUrl } from "@/utils/image";
 import { Activity, PrismaClient } from "@prisma/client";
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.locale('ko');
+
+const KST = 'Asia/Seoul';
 
 const prisma = new PrismaClient();
 
@@ -51,13 +61,21 @@ export class ActivityService {
     });
   }
 
+  
   static async list(date: string) {
+    // 한국 시간 기준 하루의 시작과 끝
+    const startOfDay = dayjs.tz(`${date}T00:00:00`, KST).utc().toDate();
+    const endOfDay = dayjs.tz(`${date}T23:59:59.999`, KST).utc().toDate();
+
     return await prisma.activity.findMany({
       where: {
         createdAt: {
-          gte: new Date(date), // 이상
-          lt: new Date(date + 'T23:59:59'), // 미만
+          gte: startOfDay,
+          lte: endOfDay,
         },
+      },
+      orderBy: {
+      createdAt: 'desc',
       },
       include: { images: true },
     });

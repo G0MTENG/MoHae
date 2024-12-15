@@ -1,8 +1,9 @@
 import { PropsWithChildren } from 'react'
 import { NavLink, NavLinkProps } from 'react-router-dom'
 import styled from 'styled-components'
-import { BMJua, Emoji } from '../atoms'
+import { BMJua, Emoji, EmptyUser, Icons } from '../atoms'
 import { COLORS } from '@/constants'
+import { IconButton } from '../modules'
 
 export interface ListItemProps {
   imageUrl: string
@@ -65,18 +66,43 @@ const ArchiveListItem = ({
   )
 }
 
-export const List = ({ children }: PropsWithChildren) => {
-  return <Container>{children}</Container>
+interface FriendListItemProps {
+  avatar?: string
+  username: string
+  onClick: VoidFunction
+}
+const FriendListItem = ({ avatar, username, onClick }: FriendListItemProps) => {
+  return (
+    <FriendListItemContainer>
+      {avatar ? <img className='avatar' src={avatar} /> : <EmptyUser />}
+      <BMJua.Body className='title'>{username}</BMJua.Body>
+      <IconButton type='button' onClick={onClick} icon={<Icons.TRASH size={24} />} />
+    </FriendListItemContainer>
+  )
+}
+
+interface ListProps {
+  gap?: number
+  style?: React.CSSProperties
+}
+
+export const List = ({ children, gap, style }: PropsWithChildren<ListProps>) => {
+  return (
+    <Container style={style} gap={gap}>
+      {children}
+    </Container>
+  )
 }
 
 List.Chat = ChatListItem
 List.Archive = ArchiveListItem
+List.Friend = FriendListItem
 
-const Container = styled.div`
+const Container = styled.ul<Pick<ListProps, 'gap'>>`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: ${(props) => props.gap ?? 16}px;
 `
 
 const ItemContainer = styled(NavLink)`
@@ -105,5 +131,22 @@ const ItemContainer = styled(NavLink)`
   & .caption {
     flex: 1;
     text-align: right;
+  }
+`
+
+const FriendListItemContainer = styled.div`
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  & .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    object-fit: cover;
+  }
+
+  & .title {
+    flex: 1;
   }
 `

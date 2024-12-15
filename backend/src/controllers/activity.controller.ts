@@ -1,4 +1,4 @@
-import { ActivityService, ActivityWithImages } from "@/services"
+import { ActivityService, ActivityWithImages, UserService } from "@/services"
 import { Request, Response } from "express";
 
 export const ActivityController = {
@@ -65,21 +65,41 @@ export const ActivityController = {
   detail: async (req: Request, res: Response) => {
     // req.params.id로 특정 activity를 찾아서 response로 보낸다.
     // 자신 / 친구를 제외한 사용자가 요청했을 때 잘못된 요청이므로 403 (forbidden) 에러를 던진다. -> 이건 친구 기능을 개발한 후 추가
+    if (!req.user) {
+      res.status(401).send({ message: '로그인이 필요합니다.' })
+      return ;
+    }
+
     const activityId = Number(req.params.id)
     const detailActivity = await ActivityService.detail(activityId)
 
     if (!detailActivity) {
-      res.status(404).send({ message: '존재하지 않습니다.' })
+      res.status(404).send({ message: '활동이 존재하지 않습니다.' })
       return ;
     }
 
-    res.send(detailActivity)
+    const userInfo = await UserService.info(detailActivity.userId)
+
+    if (!userInfo) {
+      res.status(404).send({ message: '유저가 존재하지 않습니다.' })
+      return ;
+    }
+
+    res.send({
+      activity: detailActivity,
+      owner: req.user.id === detailActivity.userId,
+      user: {
+        username: userInfo.username,
+        avatar: userInfo.avatar
+      }
+    })
     return
   },
   delete: async (req: Request, res: Response) => {
     // req.params.id로 특정 activity를 찾아서 삭제한다.
     // 삭제된 activity를 response로 보낸다.
     const activityId = Number(req.params.id)
+    console.log(activityId)
     const deleteActivity = await ActivityService.delete(activityId)
 
     if (!deleteActivity) {

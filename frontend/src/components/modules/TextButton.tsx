@@ -13,6 +13,7 @@ interface ButtonProps extends NativeButtonProps {
 
 const ButtonStyle = styled.button`
   background-color: transparent;
+  cursor: pointer;
 `
 
 export const TextButton = ({ color, children, ...props }: PropsWithChildren<ButtonProps>) => {

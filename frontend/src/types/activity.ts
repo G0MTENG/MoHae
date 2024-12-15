@@ -1,4 +1,4 @@
-import { CreateActivitySchema } from '@/schemas/activity'
+import { CreateActivitySchema } from '@/schemas'
 import * as z from 'zod'
 
 export type CreateActivitySchemaType = z.infer<typeof CreateActivitySchema>
@@ -18,7 +18,7 @@ export interface Activity {
   emoji: string
   images: Image[]
   createdAt: string
-  endAt: string
+  endAt?: string
   userId: number
 }
 
@@ -28,7 +28,15 @@ export type FetchRecentActivityResponse = Activity
 
 export type FetchListActivityResponse = Activity[]
 
-export type FetchDetailActivityResponse = Activity
+export type FetchDetailActivityResponse = {
+  activity: Activity
+  owner: boolean
+  user: {
+    userId: number
+    username: string
+    avartar: string
+  }
+}
 
 export type DeleteActivityResponse = Activity
 

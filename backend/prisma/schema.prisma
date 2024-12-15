@@ -18,6 +18,7 @@ model User {
   username   String
   email      String       @unique
   password   String
+  avatar     String?
   randomCode String       @unique
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
@@ -73,7 +74,7 @@ model Image {
   activityId Int
   createdAt  DateTime @default(now())
 
-  activity Activity @relation(fields: [activityId], references: [id])
+  activity Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
   
   @@index([activityId])
 }

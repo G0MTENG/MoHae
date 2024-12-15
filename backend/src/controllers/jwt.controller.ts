@@ -23,18 +23,18 @@ export const JWTController = {
         throw new Error('유효하지 않은 토큰입니다.');
       }
 
-      if (typeof decoded === 'string' || !('payload' in decoded)) {
+      if (typeof decoded === 'string' || !('id' in decoded || 'name' in decoded)) {
         throw new Error('decoded 타입가드 에러입니다.');
       }
 
-      const { id, name } = decoded.payload;
+      const { id, name } = decoded;
       const user = await UserService.findUser({ id, username: name });
 
       if (!user) {
         throw new Error('사용자를 찾을 수 없습니다')
       }
 
-      const accessToken = JWTService.generateToken({ id: user.id, name: user }, 'ACCESS');
+      const accessToken = JWTService.generateToken({ id: user.id, name: user.username }, 'ACCESS');
       res.send({
         accessToken,
       });

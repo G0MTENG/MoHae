@@ -10,6 +10,9 @@ import {
   AddPage,
   FriendsPage,
   SettingsPage,
+  ActivityDetailPage,
+  AddFriendsPage,
+  EditProfilePage,
 } from '@/pages'
 import { ROUTES } from '@/constants'
 import { MainTemplate } from '@/components/templates'
@@ -38,7 +41,17 @@ export const Router = () => {
         {/* 추가 페이지 */}
         <Route path={ROUTES.ADD} element={<AddPage />} />
 
+        {/* 활동 디테일 */}
+        <Route path={ROUTES.ACTIVITY} element={<ActivityDetailPage />} />
+
+        {/* edit profile */}
+        <Route path={ROUTES.EDIT_PROFILE} element={<EditProfilePage />} />
+
+        {/* add friends */}
+        <Route path={ROUTES.ADD_FRIENDS} element={<AddFriendsPage />} />
+
         {/* 404 Not Found */}
+        <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

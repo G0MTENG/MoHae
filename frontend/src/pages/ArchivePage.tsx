@@ -11,9 +11,23 @@ export const ArchivePage = () => {
   return (
     <>
       <Header>
-        <Icons.ARROW_LEFT onClick={prev} color={COLORS.BLACK} size={24} />
+        <Icons.ARROW_LEFT
+          style={{
+            cursor: 'pointer',
+          }}
+          onClick={prev}
+          color={COLORS.BLACK}
+          size={24}
+        />
         <BMJua.H5>{formatDateKo(date)}</BMJua.H5>
-        <Icons.ARROW_RIGHT onClick={next} color={COLORS.BLACK} size={24} />
+        <Icons.ARROW_RIGHT
+          style={{
+            cursor: 'pointer',
+          }}
+          onClick={next}
+          color={COLORS.BLACK}
+          size={24}
+        />
       </Header>
       {isEmpty ? (
         <Info>{'활동이 존재하지 않습니다.\n추억을 쌓아보세요!'}</Info>

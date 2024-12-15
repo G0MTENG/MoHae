@@ -5,12 +5,12 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { corsOptions } from '@/configs';
 import path from 'path';
-import { authRouter, jwtRouter, debugRouter, activityRouter, userRouter } from '@/routes';
+import { authRouter, jwtRouter, debugRouter, activityRouter, userRouter, friendRouter } from '@/routes';
 
 const app = express();
 
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(helmet());
 app.use(cors(corsOptions))
 app.use(express.json());
@@ -26,6 +26,7 @@ app.use(authRouter);
 app.use(jwtRouter);
 app.use(userRouter);
 app.use('/activity', activityRouter)
+app.use('/friend', friendRouter);
 
 app.use((err: any, req: Request, res: Response, next: Function) => {
   console.error(err.stack);

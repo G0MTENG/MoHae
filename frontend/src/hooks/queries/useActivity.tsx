@@ -1,6 +1,14 @@
-import { createActivity, fetchActivityList, fetchRecentActivity } from '@/apis'
+import {
+  createActivity,
+  deleteActivity,
+  fetchActivityList,
+  fetchDetailActivity,
+  fetchRecentActivity,
+} from '@/apis'
 import {
   CreateActivityResponse,
+  DeleteActivityResponse,
+  FetchDetailActivityResponse,
   FetchListActivityResponse,
   FetchRecentActivityResponse,
   MutationOptions,
@@ -40,5 +48,25 @@ export const useFetchActivityList = (
     queryKey: ['main', 'list', date],
     queryFn: () => fetchActivityList(date),
     ...queryOptions,
+  })
+}
+
+export const useFetchDetailActivity = (
+  id: number,
+  queryOptions?: QueryOptions<FetchDetailActivityResponse | null>,
+) => {
+  return useQuery({
+    queryKey: ['activity', 'detail', id],
+    queryFn: () => fetchDetailActivity(id),
+    ...queryOptions,
+  })
+}
+
+export const useDeleteActivity = (
+  mutateOptions?: MutationOptions<DeleteActivityResponse, number>,
+) => {
+  return useMutation({
+    mutationFn: deleteActivity,
+    ...mutateOptions,
   })
 }

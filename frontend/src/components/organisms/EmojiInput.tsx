@@ -32,7 +32,7 @@ export const EmojiInput = ({ watch, setValue }: EmojiInputProps) => {
         </PreviewEmoji>
       </SelectContainer>
       {isOpen && (
-        <Modal close={close}>
+        <Modal height='80%' close={close}>
           <Preview>
             <BMJua.H5>선택한 이모지 : </BMJua.H5>
             <Emoji>{emoji}</Emoji>

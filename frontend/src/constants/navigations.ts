@@ -14,4 +14,8 @@ export const ROUTES = Object.freeze({
     SETTINGS: 'settings', // 상대 경로
   },
   SEND: '/send',
+  ACTIVITY: '/activity/:id',
+  NOT_FOUND: '/not-found',
+  ADD_FRIENDS: '/friends/add',
+  EDIT_PROFILE: '/edit-profile',
 } as const)

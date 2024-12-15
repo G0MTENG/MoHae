@@ -15,7 +15,7 @@ export class Activities {
       if (index > 0) {
         const prevActivityTime = dayjs(array[index - 1].createdAt)
         const createdAt = dayjs(activity.createdAt)
-        const diffInMinutes = createdAt.diff(prevActivityTime, 'minute')
+        const diffInMinutes = prevActivityTime.diff(createdAt, 'minute')
 
         caption =
           diffInMinutes < 60 ? `${diffInMinutes}분` : `${Math.floor(diffInMinutes / 60)}시간`
@@ -23,7 +23,7 @@ export class Activities {
 
       return {
         id: activity.id,
-        imageUrl: activity.images[0].imageUrl,
+        imageUrl: activity.images[0]?.imageUrl,
         title: activity.title,
         emoji: activity.emoji,
         caption,
