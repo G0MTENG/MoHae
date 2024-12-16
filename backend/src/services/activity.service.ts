@@ -13,12 +13,12 @@ const KST = 'Asia/Seoul';
 
 const prisma = new PrismaClient();
 
-export interface ActivityWithImages extends Activity {
-  images: Express.Multer.File[]
+export interface ActivityWithImages<T> extends Activity {
+  images: T[]
 }
 
 export class ActivityService {
-  static async create({ title, description, emoji, userId, images }: ActivityWithImages) {
+  static async create({ title, description, emoji, userId, images }: ActivityWithImages<Express.Multer.File>) {
     return await prisma.activity.create({
       data: {
         title,
@@ -99,7 +99,7 @@ export class ActivityService {
     });
   }
 
-  static async update(id: number, { title, description, emoji, images }: ActivityWithImages) {
+  static async update(id: number, { title, description, emoji, images }: ActivityWithImages<string>) {
     return await prisma.activity.update({
       where: {
         id,
@@ -109,8 +109,9 @@ export class ActivityService {
         description,
         emoji,
         images: images && {
+          deleteMany: {},
           create: images.map((image, index) => ({
-              imageUrl: image.path,
+              imageUrl: image,
               order: index,
             })
           ),

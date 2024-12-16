@@ -1,4 +1,4 @@
-import { CreateActivitySchemaType } from '@/types'
+import { ActivitySchemaType } from '@/types'
 import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 import { BMJua } from '../atoms'
 import { COLORS } from '@/constants'
@@ -6,14 +6,15 @@ import styled from 'styled-components'
 import { ImageInput, PrewviewPhotos } from '../modules'
 
 interface PhotoInputProps {
-  watch: UseFormWatch<CreateActivitySchemaType>
-  register: UseFormRegister<CreateActivitySchemaType>
-  setValue: UseFormSetValue<CreateActivitySchemaType>
+  watch: UseFormWatch<ActivitySchemaType>
+  register: UseFormRegister<ActivitySchemaType>
+  setValue: UseFormSetValue<ActivitySchemaType>
   error?: string
 }
 
 export const PhotoInput = ({ watch, register, setValue, error }: PhotoInputProps) => {
   const photos = watch('images') || []
+  console.log(photos)
 
   return (
     <Container>
@@ -24,7 +25,7 @@ export const PhotoInput = ({ watch, register, setValue, error }: PhotoInputProps
         {error ?? ''}
       </BMJua.Caption>
       <Previews>
-        <ImageInput register={register} setValue={setValue} />
+        <ImageInput register={register} photos={photos} setValue={setValue} />
         <PrewviewPhotos setValue={setValue} photos={photos} />
       </Previews>
     </Container>

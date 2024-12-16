@@ -25,7 +25,6 @@ export const useCreateFriend = (
   return useMutation({
     mutationFn: createFriend,
     onSuccess: () => {
-      console.log('성공')
       queryClient.resetQueries({
         queryKey: ['friends'],
       })

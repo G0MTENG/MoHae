@@ -4,11 +4,11 @@ import { BMJua, Emoji } from '../atoms'
 import styled from 'styled-components'
 import { COLORS } from '@/constants'
 import { UseFormSetValue, UseFormWatch } from 'react-hook-form'
-import type { CreateActivitySchemaType } from '@/types'
+import type { ActivitySchemaType } from '@/types'
 
 interface EmojiInputProps {
-  watch: UseFormWatch<CreateActivitySchemaType>
-  setValue: UseFormSetValue<CreateActivitySchemaType>
+  watch: UseFormWatch<ActivitySchemaType>
+  setValue: UseFormSetValue<ActivitySchemaType>
 }
 
 export const EmojiInput = ({ watch, setValue }: EmojiInputProps) => {

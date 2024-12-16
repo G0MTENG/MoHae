@@ -1,4 +1,5 @@
 import { ActivityService, ActivityWithImages, FriendService, UserService } from "@/services"
+import { parseImageUrl } from "@/utils/image";
 import { Request, Response } from "express";
 
 export const ActivityController = {
@@ -27,7 +28,7 @@ export const ActivityController = {
         emoji,
         userId,
         images: files
-      } as ActivityWithImages)
+      } as ActivityWithImages<Express.Multer.File>)
 
       res.send(createActivity)
       return ;
@@ -114,7 +115,6 @@ export const ActivityController = {
     // req.params.id로 특정 activity를 찾아서 삭제한다.
     // 삭제된 activity를 response로 보낸다.
     const activityId = Number(req.params.id)
-    console.log(activityId)
     const deleteActivity = await ActivityService.delete(activityId)
 
     if (!deleteActivity) {
@@ -131,6 +131,21 @@ export const ActivityController = {
     const activityId = Number(req.params.id)
     const files = req.files as Express.Multer.File[]
     const { title, description, emoji } = req.body
+
+    let urls = []
+    if (req.body.urls && typeof req.body.urls === 'string') {
+      urls = JSON.parse(req.body.urls)
+    }
+
+    if (urls.length + files.length > 4) {
+      res.status(400).send({ message: '이미지는 3개까지 저장이 가능합니다.'})
+      return
+    }
+
+    const images = files && files.map(file => parseImageUrl(file)) || []
+    images.concat(urls)
+
+    console.log(images)
 
     if (!req.user) {
       res.status(401).send({ message: '로그인이 필요합니다.' })
@@ -153,8 +168,8 @@ export const ActivityController = {
       title,
       description,
       emoji,
-      images: files
-    } as ActivityWithImages)
+      images,
+    } as ActivityWithImages<string>)
 
     res.send(updateActivity)
     return

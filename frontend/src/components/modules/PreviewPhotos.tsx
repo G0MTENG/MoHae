@@ -1,10 +1,10 @@
 import { UseFormSetValue } from 'react-hook-form'
 import { PreviewImage } from '../atoms'
-import { CreateActivitySchemaType } from '@/types'
+import { ActivitySchemaType } from '@/types'
 
 interface PreviewPhotosProps {
-  photos: File[]
-  setValue: UseFormSetValue<CreateActivitySchemaType>
+  photos: (File | string)[]
+  setValue: UseFormSetValue<ActivitySchemaType>
 }
 
 export const PrewviewPhotos = ({ photos, setValue }: PreviewPhotosProps) => {
@@ -13,14 +13,22 @@ export const PrewviewPhotos = ({ photos, setValue }: PreviewPhotosProps) => {
     setValue('images', filertedPhotos)
   }
 
+  const formatPhoto = (photo: File | string) => {
+    if (photo instanceof File) {
+      return URL.createObjectURL(photo)
+    }
+
+    return photo
+  }
+
   return (
     photos.length > 0 &&
     photos.map((photo, index) => (
       <PreviewImage
-        key={photo.name}
+        key={index}
         index={index}
         onDelete={onDelete}
-        src={URL.createObjectURL(photo)}
+        src={formatPhoto(photo)}
         alt={`preview-${index}`}
       />
     ))

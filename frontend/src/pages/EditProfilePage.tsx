@@ -17,8 +17,6 @@ export const EditProfilePage = () => {
     formState: { errors },
   } = useEditProfile()
 
-  console.log(errors)
-
   return (
     <>
       <Header>

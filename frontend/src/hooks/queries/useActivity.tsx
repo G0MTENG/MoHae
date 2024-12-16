@@ -4,6 +4,7 @@ import {
   fetchActivityList,
   fetchDetailActivity,
   fetchRecentActivity,
+  updateActivity,
 } from '@/apis'
 import {
   CreateActivityResponse,
@@ -12,20 +13,15 @@ import {
   FetchListActivityResponse,
   FetchRecentActivityResponse,
   MutationOptions,
+  UpdateActivityResponse,
 } from '@/types'
 import { QueryOptions, useMutation, useQuery } from '@tanstack/react-query'
-import { useNavigate } from 'react-router-dom'
 
 export const useCreateActivity = (
   mutationOptions?: MutationOptions<CreateActivityResponse, FormData>,
 ) => {
-  const navigator = useNavigate()
   return useMutation({
     mutationFn: createActivity,
-    onSuccess: () => {
-      alert('정상적으로 활동이 등록되었습니다.')
-      navigator('/main/home')
-    },
     ...mutationOptions,
   })
 }
@@ -52,7 +48,7 @@ export const useFetchActivityList = (
 }
 
 export const useFetchDetailActivity = (
-  id: number,
+  id?: number,
   queryOptions?: QueryOptions<FetchDetailActivityResponse | null>,
 ) => {
   return useQuery({
@@ -67,6 +63,15 @@ export const useDeleteActivity = (
 ) => {
   return useMutation({
     mutationFn: deleteActivity,
+    ...mutateOptions,
+  })
+}
+
+export const useUpdateActivity = (
+  mutateOptions?: MutationOptions<UpdateActivityResponse, { id: number; data: FormData }>,
+) => {
+  return useMutation({
+    mutationFn: ({ id, data }) => updateActivity(id, data),
     ...mutateOptions,
   })
 }

@@ -1,7 +1,7 @@
-import { CreateActivitySchema } from '@/schemas'
+import { ActivitySchema } from '@/schemas'
 import * as z from 'zod'
 
-export type CreateActivitySchemaType = z.infer<typeof CreateActivitySchema>
+export type ActivitySchemaType = z.infer<typeof ActivitySchema>
 
 export interface Image {
   id: number

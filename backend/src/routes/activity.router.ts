@@ -8,8 +8,8 @@ const router = express.Router();
 
 router
   .post('/', upload.array('images', 3) ,validate(ActivityValidator.form), ActivityController.create)
+  .put('/:id', upload.array('images', 3), validate(ActivityValidator.form), ActivityController.update)
   .delete('/:id', ActivityController.delete)
-  .put('/:id', validate(ActivityValidator.form), ActivityController.update)
   .get('/recent', ActivityController.recent)
   .get('/', ActivityController.list)
   .get('/:id', ActivityController.detail)

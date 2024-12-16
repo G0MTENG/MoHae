@@ -6,7 +6,7 @@ export const validate = (validations: any[]) => {
     for (const validation of validations) {
       await validation.run(req);
     }
-
+    
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(400).json({ errors: errors.array().map((error) => error.msg) });

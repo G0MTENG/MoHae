@@ -1,12 +1,13 @@
 import { COLORS } from '@/constants'
-import { CreateActivitySchemaType } from '@/types'
+import { ActivitySchemaType } from '@/types'
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form'
 import { BMJua } from '../atoms'
 import styled from 'styled-components'
 
 interface ImageInputProps {
-  register: UseFormRegister<CreateActivitySchemaType>
-  setValue: UseFormSetValue<CreateActivitySchemaType>
+  register: UseFormRegister<ActivitySchemaType>
+  setValue: UseFormSetValue<ActivitySchemaType>
+  photos: (File | string)[]
 }
 
 const HiddenInput = styled.input`
@@ -30,7 +31,7 @@ const InputLabel = styled.label`
   }
 `
 
-export const ImageInput = ({ register, setValue }: ImageInputProps) => {
+export const ImageInput = ({ register, photos, setValue }: ImageInputProps) => {
   return (
     <>
       <InputLabel htmlFor='photo'>
@@ -44,7 +45,7 @@ export const ImageInput = ({ register, setValue }: ImageInputProps) => {
         {...register('images', {
           onChange: (e) => {
             const files = Array.from(e.target.files ?? []) as File[]
-            setValue('images', files)
+            setValue('images', photos.concat(files))
           },
         })}
       />
