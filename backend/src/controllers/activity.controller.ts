@@ -145,8 +145,6 @@ export const ActivityController = {
     const images = files && files.map(file => parseImageUrl(file)) || []
     images.concat(urls)
 
-    console.log(images)
-
     if (!req.user) {
       res.status(401).send({ message: '로그인이 필요합니다.' })
       return ;

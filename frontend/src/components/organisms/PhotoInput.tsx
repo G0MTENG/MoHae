@@ -14,7 +14,6 @@ interface PhotoInputProps {
 
 export const PhotoInput = ({ watch, register, setValue, error }: PhotoInputProps) => {
   const photos = watch('images') || []
-  console.log(photos)
 
   return (
     <Container>
