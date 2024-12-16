@@ -13,6 +13,7 @@ import {
   ActivityDetailPage,
   AddFriendsPage,
   EditProfilePage,
+  UpdateActivityPage,
 } from '@/pages'
 import { ROUTES } from '@/constants'
 import { MainTemplate } from '@/components/templates'
@@ -46,6 +47,9 @@ export const Router = () => {
 
         {/* edit profile */}
         <Route path={ROUTES.EDIT_PROFILE} element={<EditProfilePage />} />
+
+        {/* update activity */}
+        <Route path={ROUTES.UPDATE_ACTIVITY} element={<UpdateActivityPage />} />
 
         {/* add friends */}
         <Route path={ROUTES.ADD_FRIENDS} element={<AddFriendsPage />} />

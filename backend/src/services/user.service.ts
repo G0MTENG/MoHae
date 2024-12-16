@@ -4,6 +4,32 @@ import { PrismaClient, User } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class UserService {
+  static async users(ids: number[]) {
+    return await Promise.all(
+      ids.map(async (id) => {
+        return await prisma.user.findUnique({
+          where: {
+            id,
+          },
+          select: {
+            id: true,
+            username: true,
+            avatar: true,
+          }
+        })
+      })
+    )
+  }
+
+  static async update(id: number, data: Partial<User>) {
+    return await prisma.user.update({
+      where: {
+        id,
+      },
+      data,
+    });
+  }
+
   static async info(id: number) {
     return await prisma.user.findUnique({
       where: {

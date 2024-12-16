@@ -1,4 +1,4 @@
-import { FriendService } from "@/services";
+import { FriendService, UserService } from "@/services";
 import { Request, Response } from "express";
 
 export const FriendController = {
@@ -11,7 +11,8 @@ export const FriendController = {
 
       const { id: userId } = req.user;
       const friends = await FriendService.getFriends(userId);
-      res.send({ friends: friends.map(friend => (friend.user))});
+      const friendsInfo = await UserService.users(friends.map(friend => (friend.friendId)))
+      res.send({ friends: friendsInfo });
       return
     } catch (error) {
       console.error(error);
@@ -53,7 +54,9 @@ export const FriendController = {
       }
 
       const { id: userId } = req.user;
-      const activities = await FriendService.getActivities(userId);
+      const friends = await FriendService.getFriends(userId);
+      const friendIds = friends.map(friend => friend.friendId);
+      const activities = await FriendService.getActivities(friendIds);
 
       if (activities.length === 0) {
         res.status(404).send({ message: '활동 중인 친구가 존재하지 않습니다.' });

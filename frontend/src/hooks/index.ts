@@ -5,6 +5,7 @@ export * from './useActivityForm'
 export * from './useArchive'
 export * from './useActivityDetailButtonHandlers'
 export * from './useAddFriends'
+export * from './useEditProfile'
 
 // quries
 export * from './queries/useAuth'

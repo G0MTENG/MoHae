@@ -12,18 +12,6 @@ interface PhotoInputProps {
   error?: string
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`
-
-const Previews = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-`
-
 export const PhotoInput = ({ watch, register, setValue, error }: PhotoInputProps) => {
   const photos = watch('images') || []
 
@@ -42,3 +30,15 @@ export const PhotoInput = ({ watch, register, setValue, error }: PhotoInputProps
     </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
+
+const Previews = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`

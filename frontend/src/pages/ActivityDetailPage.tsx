@@ -1,4 +1,4 @@
-import { BMJua, Emoji, Favicon, Header, Icons } from '@/components/atoms'
+import { BMJua, Emoji, EmptyUser, Header, Icons } from '@/components/atoms'
 import { Button, Modal } from '@/components/modules'
 import { ImageSlider } from '@/components/modules'
 import { COLORS } from '@/constants'
@@ -36,7 +36,7 @@ export const ActivityDetailPage = () => {
       <DetailView>
         {!owner && (
           <UserInfo>
-            {avartar ? <img className='avartar' src={avartar} /> : <Favicon size={48} />}
+            {avartar ? <img className='avartar' src={avartar} /> : <EmptyUser size={48} />}
             <BMJua.H5>{username}</BMJua.H5>
           </UserInfo>
         )}

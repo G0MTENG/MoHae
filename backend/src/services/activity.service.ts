@@ -62,13 +62,14 @@ export class ActivityService {
   }
 
   
-  static async list(date: string) {
+  static async list(userId: number, date: string) {
     // 한국 시간 기준 하루의 시작과 끝
     const startOfDay = dayjs.tz(`${date}T00:00:00`, KST).utc().toDate();
     const endOfDay = dayjs.tz(`${date}T23:59:59.999`, KST).utc().toDate();
 
     return await prisma.activity.findMany({
       where: {
+        userId,
         createdAt: {
           gte: startOfDay,
           lte: endOfDay,

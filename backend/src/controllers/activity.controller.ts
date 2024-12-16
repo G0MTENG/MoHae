@@ -1,4 +1,4 @@
-import { ActivityService, ActivityWithImages, UserService } from "@/services"
+import { ActivityService, ActivityWithImages, FriendService, UserService } from "@/services"
 import { Request, Response } from "express";
 
 export const ActivityController = {
@@ -57,8 +57,14 @@ export const ActivityController = {
   },
   list: async (req: Request, res: Response) => {
     // query string으로 날짜를 받아서, 해당 날짜에 생성된 activity들을 찾아서 response로 보낸다. (페이지네이션 적용 X)
+    const user = req.user
+    if (!user) {
+      res.status(401).send({ message: '로그인이 필요합니다.' })
+      return ;
+    }
+
     const date = req.query.date as string
-    const listActivity = await ActivityService.list(date)
+    const listActivity = await ActivityService.list(user.id, date)
     res.send(listActivity)
     return ;
   },
@@ -72,16 +78,25 @@ export const ActivityController = {
 
     const activityId = Number(req.params.id)
     const detailActivity = await ActivityService.detail(activityId)
-
+    
     if (!detailActivity) {
       res.status(404).send({ message: '활동이 존재하지 않습니다.' })
       return ;
     }
-
+    
     const userInfo = await UserService.info(detailActivity.userId)
 
     if (!userInfo) {
       res.status(404).send({ message: '유저가 존재하지 않습니다.' })
+      return ;
+    }
+
+    const userId = req.user.id
+    const friendId = detailActivity.userId
+    const isFriend = await FriendService.isFriend(userId, friendId)
+
+    if (!isFriend && userId !== friendId) {
+      res.status(403).send({ message: '권한이 없습니다.' })
       return ;
     }
 

@@ -51,7 +51,7 @@ export const RecentActivityView = () => {
     <Container>
       <BMJua.H5 style={{ paddingLeft: '4px' }}>{username}님은 현재</BMJua.H5>
       <ActivityContainer>
-        <ImageSlider images={imageUrls} />
+        {imageUrls && imageUrls.length > 0 && <ImageSlider images={imageUrls} />}
         <TitleNEmoji>
           <BMJua.H5>{title}</BMJua.H5>
           <Emoji>{emoji}</Emoji>

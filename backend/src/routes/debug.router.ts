@@ -20,5 +20,11 @@ router
     res.send(activities);
     return 
   })
+  .get('/connections', async (req: Request, res: Response) => {
+    const friends = await prisma.connection.findMany();
+
+    res.send(friends);
+    return 
+  })
 
 export const debugRouter = router;

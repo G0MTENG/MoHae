@@ -3,19 +3,22 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 
 export class FriendService {
+  static async isFriend(userId: number, friendId: number) {
+    return await prisma.connection.findFirst({
+      where: {
+        userId,
+        friendId
+      }
+    }) !== null
+  }
+
   static async getFriends(userId: number) {
     return await prisma.connection.findMany({
       where: {
         userId
       },
       select: {
-        user: {
-          select: {
-            id: true,
-            username: true,
-            avatar: true
-          }
-        }
+        friendId: true,
       }
     })
   }
@@ -54,33 +57,11 @@ export class FriendService {
     ])
   }
 
-  static async getActivities(userId: number) {
-    // userId의 친구들의 최근 활동을 가져옴
-    // 1. userId의 친구 목록을 가져온다.
-    // 2. 친구 목록의 userId를 이용해 최근 활동을 가져온다.
-    // 3. 최근 활동을 반환한다.
-    
-    const friendsQuery = await prisma.connection.findMany({
-      where: {
-        userId
-      },
-      select: {
-        user: {
-          select: {
-            id: true,
-            username: true,
-            avatar: true
-          }
-        }
-      }
-    })
-
-    const friends = friendsQuery.map(friend => ({ id: friend.user.id, username: friend.user.username }))
-    
-    const activities = await Promise.all([...friends.map(async ({ id, username }) => {
+  static async getActivities(friendsIds: number[]) {
+    const activities = await Promise.all([...friendsIds.map(async friendId => {
       const recentActivity = await prisma.activity.findFirst({
         where: {
-          userId: id
+          userId: friendId
         },
         orderBy: {
           createdAt: 'desc'
@@ -94,14 +75,29 @@ export class FriendService {
 
       if (!recentActivity) return null
 
-      return {
-        username,
-        userId: id,
-        ...recentActivity,
-      }
-    }).filter(Boolean)])
+      const userInfo = await prisma.user.findFirst({
+        where: {
+          id: friendId
+        },
+        select: {
+          username: true,
+          avatar: true
+        }
+      })
 
-    return activities
+      if (!userInfo) return null
+
+      return {
+        activity: recentActivity,
+        user: {
+          id: friendId,
+          username: userInfo.username,
+          avatar: userInfo.avatar
+        }
+      }
+    })])
+
+    return activities.filter(activity => activity !== null)
   }
 
   static async find (friendCode: string) {

@@ -6,3 +6,13 @@ export const fetchUserInfo = async () => {
 
   return response.data
 }
+
+export const editUserProfile = async (data: FormData) => {
+  const response = await api.put('/profile', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+
+  return response.data
+}

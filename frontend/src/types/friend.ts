@@ -10,12 +10,16 @@ interface Friend {
 }
 
 interface FriendWithActivity {
-  id: number
-  userId: number
-  title: string
-  emoji: string
-  username: string
-  avatar?: string
+  activity: {
+    id: number
+    title: string
+    emoji: string
+  }
+  user: {
+    avatar?: string
+    id: number
+    username: string
+  }
 }
 
 export interface FetchFriendsResponse {

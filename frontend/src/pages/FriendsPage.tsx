@@ -38,8 +38,17 @@ export const FriendsPage = () => {
         </S.MyContainer>
         {friendsData && friendsData.length > 0 ? (
           <S.FriendsContainer>
-            {friendsData.map((friend) => (
-              <ActivityBubble key={friend?.id} {...friend} />
+            {friendsData.map(({ activity, user }) => (
+              <ActivityBubble
+                key={user.id}
+                {...{
+                  id: activity.id,
+                  title: activity.title,
+                  emoji: activity.emoji,
+                  avatar: user?.avatar,
+                  username: user.username,
+                }}
+              />
             ))}
           </S.FriendsContainer>
         ) : (

@@ -18,4 +18,5 @@ export const ROUTES = Object.freeze({
   NOT_FOUND: '/not-found',
   ADD_FRIENDS: '/friends/add',
   EDIT_PROFILE: '/edit-profile',
+  UPDATE_ACTIVITY: '/update/:id',
 } as const)
