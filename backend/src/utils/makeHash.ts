@@ -1,3 +1,3 @@
 export const makeHash = (string: string) => {
-  return string;
+  return string
 }

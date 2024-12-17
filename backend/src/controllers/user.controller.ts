@@ -1,12 +1,12 @@
-import { parseImageUrl } from "@/utils/image";
-import { UserService } from "@/services";
-import { Request, Response } from "express";
+import { parseImageUrl } from '@/utils/image'
+import { UserService } from '@/services'
+import { Request, Response } from 'express'
 
 export const UserController = {
   user: async (req: Request, res: Response) => {
     try {
       const user = req.user
-  
+
       if (!user) {
         throw new Error('유저를 찾을 수 없습니다.')
       }
@@ -28,7 +28,7 @@ export const UserController = {
     try {
       const avatar = req.file
       const username = req.body.username
-  
+
       if (!username) {
         res.status(400).send('username이 필요합니다.')
         return
@@ -47,12 +47,12 @@ export const UserController = {
       }
 
       res.send({
-        message: '프로필이 업데이트 되었습니다.'
+        message: '프로필이 업데이트 되었습니다.',
       })
       return
     } catch (error) {
       console.error(error)
       res.status(500).send('에러가 발생했습니다.')
     }
-  }
+  },
 }

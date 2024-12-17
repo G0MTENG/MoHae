@@ -1,38 +1,47 @@
 import helmet from 'helmet'
 import cors from 'cors'
-import express, { Request, Response } from 'express';
-import morgan from 'morgan';
-import cookieParser from 'cookie-parser';
-import { corsOptions } from '@/configs';
-import path from 'path';
-import { authRouter, jwtRouter, debugRouter, activityRouter, userRouter, friendRouter } from '@/routes';
+import express, { Request, Response } from 'express'
+import morgan from 'morgan'
+import cookieParser from 'cookie-parser'
+import { corsOptions } from '@/configs'
+import path from 'path'
+import {
+  authRouter,
+  jwtRouter,
+  debugRouter,
+  activityRouter,
+  userRouter,
+  friendRouter,
+  chatRouter,
+} from '@/routes'
 
-const app = express();
+const app = express()
 
-app.use(morgan('dev'));
-app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use(helmet());
+app.use(morgan('dev'))
+app.use('/public', express.static(path.join(__dirname, 'public')))
+app.use(helmet())
 app.use(cors(corsOptions))
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World');
-});
+  res.send('Hello World')
+})
 
-app.use(debugRouter);
-app.use(authRouter);
-app.use(jwtRouter);
-app.use(userRouter);
+app.use(debugRouter)
+app.use(authRouter)
+app.use(jwtRouter)
+app.use(userRouter)
+app.use('/chat', chatRouter)
 app.use('/activity', activityRouter)
-app.use('/friend', friendRouter);
+app.use('/friend', friendRouter)
 
 app.use((err: any, req: Request, res: Response, next: Function) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 
 app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
+  console.log('Server is running on port 3000')
+})

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Emoji = styled.span`
+export const Emoji = styled.span<{ size?: number }>`
   font-family: TossFace;
-  font-size: 32px;
+  font-size: ${(props) => props.size ?? 32}px;
 `

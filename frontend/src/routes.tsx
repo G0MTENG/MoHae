@@ -14,6 +14,8 @@ import {
   AddFriendsPage,
   EditProfilePage,
   UpdateActivityPage,
+  ChatListPage,
+  ChatRoomPage,
 } from '@/pages'
 import { ROUTES } from '@/constants'
 import { MainTemplate } from '@/components/templates'
@@ -53,6 +55,10 @@ export const Router = () => {
 
         {/* add friends */}
         <Route path={ROUTES.ADD_FRIENDS} element={<AddFriendsPage />} />
+
+        {/* chatting */}
+        <Route path={ROUTES.CHAT} element={<ChatListPage />} />
+        <Route path={ROUTES.CHAT_ROOM} element={<ChatRoomPage />} />
 
         {/* 404 Not Found */}
         <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />

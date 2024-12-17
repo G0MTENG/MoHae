@@ -43,7 +43,9 @@ export const useActivityDetailButtonHandlers = () => {
     navigator(`/update/${id}`)
   }
 
-  const handleChat = (id: number) => {
+  const handleChat = (id?: number) => {
+    if (!id) return
+
     navigator(`/chat/${id}`)
   }
 

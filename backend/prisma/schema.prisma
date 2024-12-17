@@ -26,30 +26,33 @@ model User {
   connectionsAsUser   Connection[] @relation("UserAsUser")
   connectionsAsFriend Connection[] @relation("UserAsFriend")
 
-  chatRoomsAsUser   ChatRoom[] @relation("UserChatRooms")
-  chatRoomsAsFriend ChatRoom[] @relation("ChatRoomFriends")
-
   activities Activity[]
+  messages   Message[]
 }
 
 model Connection {
   id       Int @id @default(autoincrement())
   userId   Int
   friendId Int
-
-  user   User @relation("UserAsUser", fields: [userId], references: [id])
-  friend User @relation("UserAsFriend", fields: [friendId], references: [id])
-}
-
-model ChatRoom {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  friendId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user   User @relation("UserChatRooms", fields: [userId], references: [id])
-  friend User @relation("ChatRoomFriends", fields: [friendId], references: [id])
+  user   User @relation("UserAsUser", fields: [userId], references: [id])
+  friend User @relation("UserAsFriend", fields: [friendId], references: [id])
+
+  message Message[]
+}
+model Message {
+  id        Int      @id @default(autoincrement())
+  connectionId Int
+  userId     Int
+  content    String
+  createdAt  DateTime @default(now())
+
+  connection Connection @relation(fields: [connectionId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@index([connectionId])
 }
 
 model Activity {

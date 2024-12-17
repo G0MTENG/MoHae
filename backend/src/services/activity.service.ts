@@ -1,24 +1,30 @@
-import { parseImageUrl } from "@/utils/image";
-import { Activity, PrismaClient } from "@prisma/client";
-import dayjs from 'dayjs';
-import 'dayjs/locale/ko';
-import timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
+import { parseImageUrl } from '@/utils/image'
+import { Activity, PrismaClient } from '@prisma/client'
+import dayjs from 'dayjs'
+import 'dayjs/locale/ko'
+import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
-dayjs.locale('ko');
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.locale('ko')
 
-const KST = 'Asia/Seoul';
+const KST = 'Asia/Seoul'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 export interface ActivityWithImages<T> extends Activity {
   images: T[]
 }
 
 export class ActivityService {
-  static async create({ title, description, emoji, userId, images }: ActivityWithImages<Express.Multer.File>) {
+  static async create({
+    title,
+    description,
+    emoji,
+    userId,
+    images,
+  }: ActivityWithImages<Express.Multer.File>) {
     return await prisma.activity.create({
       data: {
         title,
@@ -27,14 +33,13 @@ export class ActivityService {
         userId,
         images: images && {
           create: images.map((image, index) => ({
-              imageUrl: parseImageUrl(image),
-              order: index,
-            })
-          ),
+            imageUrl: parseImageUrl(image),
+            order: index,
+          })),
         },
       },
       include: { images: true },
-    });
+    })
   }
 
   static async recentId(id: number) {
@@ -46,7 +51,7 @@ export class ActivityService {
         createdAt: 'desc',
       },
       select: { id: true },
-    });
+    })
   }
 
   static async recent(id: number) {
@@ -58,14 +63,13 @@ export class ActivityService {
         createdAt: 'desc',
       },
       include: { images: true },
-    });
+    })
   }
 
-  
   static async list(userId: number, date: string) {
     // 한국 시간 기준 하루의 시작과 끝
-    const startOfDay = dayjs.tz(`${date}T00:00:00`, KST).utc().toDate();
-    const endOfDay = dayjs.tz(`${date}T23:59:59.999`, KST).utc().toDate();
+    const startOfDay = dayjs.tz(`${date}T00:00:00`, KST).utc().toDate()
+    const endOfDay = dayjs.tz(`${date}T23:59:59.999`, KST).utc().toDate()
 
     return await prisma.activity.findMany({
       where: {
@@ -76,10 +80,10 @@ export class ActivityService {
         },
       },
       orderBy: {
-      createdAt: 'desc',
+        createdAt: 'desc',
       },
       include: { images: true },
-    });
+    })
   }
 
   static async detail(id: number) {
@@ -88,7 +92,7 @@ export class ActivityService {
         id,
       },
       include: { images: true },
-    });
+    })
   }
 
   static async delete(id: number) {
@@ -96,10 +100,13 @@ export class ActivityService {
       where: {
         id,
       },
-    });
+    })
   }
 
-  static async update(id: number, { title, description, emoji, images }: ActivityWithImages<string>) {
+  static async update(
+    id: number,
+    { title, description, emoji, images }: ActivityWithImages<string>,
+  ) {
     return await prisma.activity.update({
       where: {
         id,
@@ -111,14 +118,13 @@ export class ActivityService {
         images: images && {
           deleteMany: {},
           create: images.map((image, index) => ({
-              imageUrl: image,
-              order: index,
-            })
-          ),
+            imageUrl: image,
+            order: index,
+          })),
         },
       },
       include: { images: true },
-    });
+    })
   }
 
   static async exist(id: number) {
@@ -127,7 +133,7 @@ export class ActivityService {
       where: {
         id,
       },
-    });
+    })
   }
 
   static async updateEndAt(id: number, endAt: Date) {
@@ -138,6 +144,6 @@ export class ActivityService {
       data: {
         endAt,
       },
-    });
+    })
   }
 }

@@ -13,7 +13,8 @@ export const ROUTES = Object.freeze({
     FRIENDS: 'friends', // 상대 경로
     SETTINGS: 'settings', // 상대 경로
   },
-  SEND: '/send',
+  CHAT: '/chat',
+  CHAT_ROOM: '/chat/:id',
   ACTIVITY: '/activity/:id',
   NOT_FOUND: '/not-found',
   ADD_FRIENDS: '/friends/add',

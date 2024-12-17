@@ -1,2 +1,2 @@
-export * from './makeRandomCode';
+export * from './makeRandomCode'
 export * from './makeHash'

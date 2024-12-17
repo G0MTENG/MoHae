@@ -36,6 +36,7 @@ export type FetchDetailActivityResponse = {
     username: string
     avartar: string
   }
+  connectionId?: number
 }
 
 export type DeleteActivityResponse = Activity

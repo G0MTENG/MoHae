@@ -17,8 +17,9 @@ export const ActivityDetailPage = () => {
 
   const {
     activity: { id: detailId, title, description, emoji, images, createdAt, endAt },
-    user: { userId, username, avartar },
+    user: { username, avartar },
     owner,
+    connectionId,
   } = activityData
 
   return (
@@ -71,7 +72,7 @@ export const ActivityDetailPage = () => {
             )}
           </>
         ) : (
-          <Button onClick={() => handlers.CHAT(userId)}>채팅하러 가기</Button>
+          <Button onClick={() => handlers.CHAT(connectionId)}>채팅하러 가기</Button>
         )}
       </ButtonRowWithPadding>
     </>

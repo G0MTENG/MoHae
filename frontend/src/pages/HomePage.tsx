@@ -13,7 +13,7 @@ export const HomePage = () => {
           <Title.Small />
         </S.HeaderContainer>
         <NavLink
-          to={ROUTES.SEND}
+          to={ROUTES.CHAT}
           style={{
             width: '36px',
           }}
