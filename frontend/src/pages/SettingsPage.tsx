@@ -1,17 +1,20 @@
 import { BMJua, Favicon, Header, Icons } from '@/components/atoms'
+import { Button, Info, Modal } from '@/components/modules'
 import { List } from '@/components/templates'
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/constants'
+import { useModal } from '@/hooks'
 import { useFetchUserInfo } from '@/hooks/queries/useUser'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const SettingsPage = () => {
   const { data: userData } = useFetchUserInfo()
+  const { isOpen, open, close } = useModal()
   const navigate = useNavigate()
 
   if (!userData) return
 
-  const { username } = userData
+  const { username, randomCode } = userData
 
   const handleClickEditProfile = () => {
     navigate('/edit-profile')
@@ -21,6 +24,15 @@ export const SettingsPage = () => {
     localStorage.removeItem(ACCESS_TOKEN)
     localStorage.removeItem(REFRESH_TOKEN)
     navigate('/sign-in')
+  }
+
+  const handleClickConfirmCode = () => {
+    open()
+  }
+
+  const copy = () => {
+    navigator.clipboard.writeText(randomCode)
+    alert('복사되었습니다!')
   }
 
   return (
@@ -43,11 +55,25 @@ export const SettingsPage = () => {
           <BMJua.Body>프로필 수정</BMJua.Body>
         </Row>
         <Hr />
+        <Row onClick={handleClickConfirmCode}>
+          <Icons.CODE size={24} />
+          <BMJua.Body>코드 확인</BMJua.Body>
+        </Row>
+        <Hr />
         <Row onClick={handleClickSignOut}>
           <Icons.LOGOUT size={24} />
           <BMJua.Body>로그아웃</BMJua.Body>
         </Row>
       </List>
+      {isOpen && (
+        <Modal close={close}>
+          <Info>{`${username}님의 코드는\n${randomCode}입니다!`}</Info>
+          <Buttons>
+            <Button onClick={copy}>복사</Button>
+            <Button onClick={close}>닫기</Button>
+          </Buttons>
+        </Modal>
+      )}
     </>
   )
 }
@@ -68,4 +94,10 @@ const Row = styled.button`
 
 const Hr = styled.hr`
   margin: 8px 16px;
+`
+
+const Buttons = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: center;
 `

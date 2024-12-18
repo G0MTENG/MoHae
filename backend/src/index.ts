@@ -3,19 +3,24 @@ import cors from 'cors'
 import express, { Request, Response } from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
-import { corsOptions } from '@/configs'
+import { corsOptions, SocketIO } from '@/configs'
+import dotenv from 'dotenv'
 import path from 'path'
 import {
   authRouter,
   jwtRouter,
-  debugRouter,
+  // debugRouter,
   activityRouter,
   userRouter,
   friendRouter,
   chatRouter,
 } from '@/routes'
+import http from 'http'
+
+dotenv.config()
 
 const app = express()
+const server = http.createServer(app)
 
 app.use(morgan('dev'))
 app.use('/public', express.static(path.join(__dirname, 'public')))
@@ -29,7 +34,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello World')
 })
 
-app.use(debugRouter)
+// app.use(debugRouter)
 app.use(authRouter)
 app.use(jwtRouter)
 app.use(userRouter)
@@ -42,6 +47,8 @@ app.use((err: any, req: Request, res: Response, next: Function) => {
   res.status(500).send('Something broke!')
 })
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000')
+SocketIO.getInstance().init(server)
+
+server.listen(process.env.PORT, () => {
+  console.log('Server is running on port', process.env.PORT)
 })

@@ -3,6 +3,16 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export class FriendService {
+  static async createMessage(userId: number, roomId: number,message: string) {
+    return await prisma.message.create({
+      data: {
+        userId,
+        connectionId: roomId,
+        content: message,
+      },
+    })
+  }
+
   static async isFriend(userId: number, friendId: number) {
     return (
       (await prisma.connection.findFirst({
@@ -103,6 +113,33 @@ export class FriendService {
         randomCode: friendCode,
       },
     })
+  }
+
+  static async isConnectionUser(userId: number, roomId: number) {
+    const connection = await prisma.connection.findFirst({
+      where: {
+        id: roomId,
+      },
+    });
+  
+    // 연결이 존재하지 않는 경우
+    if (!connection) {
+      return {
+        user: null,
+        friend: null,
+        isConnectionUser: false,
+      };
+    }
+  
+    // 현재 사용자가 user인지 friend인지 확인
+    const isUser = connection.userId === userId;
+    const isFriend = connection.friendId === userId;
+  
+    return {
+      user: isUser ? connection.userId : connection.friendId, // 현재 사용자의 ID
+      friend: isUser ? connection.friendId : connection.userId, // 상대방 ID
+      isConnectionUser: isUser || isFriend, // 현재 사용자가 이 Connection에 속하는지
+    };
   }
 
   static async isExistConnection(userId: number, friendId: number) {

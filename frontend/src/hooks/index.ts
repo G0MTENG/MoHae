@@ -6,6 +6,9 @@ export * from './useArchive'
 export * from './useActivityDetailButtonHandlers'
 export * from './useAddFriends'
 export * from './useEditProfile'
+export * from './useInitChatRoom'
+export * from './useInitChatRoomSocket'
+export * from './useChat'
 
 // quries
 export * from './queries/useAuth'

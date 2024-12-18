@@ -1,8 +1,38 @@
+import { ChatRooms } from '@/configs'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 export class ChatService {
+  static async getMessages(connectionId: number) {
+    return await prisma.message.findMany({
+      where: {
+        connectionId,
+      },
+      orderBy: {
+        createdAt: 'asc',
+      }
+    })
+  }
+
+  static async findWith(userId: number, connectionId: number) {
+    const connection = await prisma.connection.findFirst({
+      where: {
+        id: connectionId,
+        OR: [
+          { userId },
+          { friendId: userId },
+        ],
+      },
+    })
+
+    if (!connection) return null
+    if (connection.userId === userId) {
+      return connection.friendId
+    } else {
+      return connection.userId
+    }
+  }
   static async find(userId: number, friendId: number) {
     const connection = await prisma.connection.findFirst({
       where: {

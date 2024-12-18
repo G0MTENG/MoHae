@@ -10,7 +10,7 @@ export interface FriendChatListItem {
 
 export type FetchChatListResponse = FriendChatListItem[]
 
-interface Chat {
+export interface Chat {
   id: number
   userId: number
   content: string
@@ -18,3 +18,12 @@ interface Chat {
 }
 
 export type FetchChatMessagesResponse = Chat[]
+
+export interface Friend {
+  id: number
+  username: string
+  avatar?: string
+  emoji?: string
+}
+
+export type FetchChatWithResponse = Friend

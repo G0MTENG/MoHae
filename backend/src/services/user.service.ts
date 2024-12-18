@@ -81,6 +81,19 @@ export class UserService {
     })
   }
 
+  static async findUserById(id: number) {
+    return await prisma.user.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        username: true,
+        avatar: true,
+      }
+    })
+  }
+
   static async findUser(filter: Pick<User, 'id' | 'username'>) {
     return await prisma.user.findFirst({
       where: {

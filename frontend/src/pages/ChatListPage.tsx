@@ -1,10 +1,11 @@
 import { Info } from '@/components/modules'
 import * as S from './ChatListPage.styled'
-import { BMJua, Emoji, Header, Icons } from '@/components/atoms'
+import { BMJua, Emoji, EmptyUser, Header, Icons } from '@/components/atoms'
 import { COLORS } from '@/constants'
 import { useFetchChatList } from '@/hooks'
 import { FriendChatListItem } from '@/types'
 import { useNavigate } from 'react-router-dom'
+import { extractDate } from '@/utils'
 
 export const ChatListPage = () => {
   const navigate = useNavigate()
@@ -16,7 +17,7 @@ export const ChatListPage = () => {
 
   return (
     <>
-      <Header style={{ marginBottom: 32 }}>
+      <Header>
         <Icons.ARROW_LEFT style={{ cursor: 'pointer' }} onClick={() => navigate(-1)} size={24} />
       </Header>
       {isLoading || isError ? (
@@ -43,7 +44,7 @@ const ChatListItem = ({
 }: FriendChatListItem & { onClick: (id: number) => void }) => {
   return (
     <S.ListItem onClick={() => onClick(connectionId)}>
-      <img className='avatar' src={avatar} />
+      {avatar ? <img className='avatar' src={avatar} /> : <EmptyUser size={48} />}
       <div className='info'>
         <div className='user-info'>
           <BMJua.Body>{username}</BMJua.Body>
@@ -51,7 +52,7 @@ const ChatListItem = ({
         </div>
         <BMJua.Caption color={COLORS.GRAY500}>{lastestMessage ?? ''}</BMJua.Caption>
       </div>
-      <BMJua.Caption color={COLORS.GRAY500}>{updatedAt}</BMJua.Caption>
+      <BMJua.Caption color={COLORS.GRAY500}>{updatedAt && extractDate(updatedAt)}</BMJua.Caption>
     </S.ListItem>
   )
 }
