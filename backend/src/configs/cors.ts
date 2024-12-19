@@ -2,7 +2,8 @@ import { CorsOptions } from 'cors'
 
 export const corsOptions: CorsOptions = {
   origin: [
-    'http://localhost:5173', // 리액트 dev
+    'https://mohae.ap-northeast-2.elasticbeanstalk.com',
+    'http://mohae.ap-northeast-2.elasticbeanstalk.com'
   ],
   credentials: true,
   optionsSuccessStatus: 204,

@@ -6,6 +6,7 @@
     "dev": "nodemon -r tsconfig-paths/register src/index.ts",
     "start": "node build/index.js",
     "build": "tsc",
+    "build-start": "tsc && tsc-alias && node -r tsconfig-paths/register build/index.js",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier . --write"
@@ -51,6 +52,8 @@
     "multer": "^1.4.5-lts.1",
     "prisma": "^6.0.1",
     "socket.io": "^4.8.1",
+    "tsc-alias": "^1.8.10",
+    "tsconfig-paths": "^4.2.0",
     "zod": "^3.23.8"
   }
 }
