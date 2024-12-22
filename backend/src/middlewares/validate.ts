@@ -12,7 +12,7 @@ export const validate = (validations: any[]) => {
       res.status(400).json({ errors: errors.array().map((error) => error.msg) })
       return
     }
-
+    
     next()
   }
 }
