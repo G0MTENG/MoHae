@@ -16,13 +16,19 @@
 
 #### 기술 스택
 
+Socket
+- Socket.IO
+
 Front-End
 - TypeScript
-- React Native
 - React
 - Vite
-- Zustand
 - Tanstack Query
+- react hook form
+- zod
+- axios
+- react router dom
+- styled components
 - yarn
 
 Back-End
@@ -30,11 +36,15 @@ Back-End
 - Express
 - Prisma
 - MySQL
-- mongoDB
+- multer
 
 Design
 - Figma
 
 Infra
-- EC2
+- Elastic Beanstalk
 - S3
+
+#### 프로젝트 구조
+
+![인프라](./images/infra.png)
