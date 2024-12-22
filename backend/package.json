@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -r tsconfig-paths/register src/index.ts",
-    "start": "node build/index.js",
+    "start": "npx prisma migrate deploy && node build/index.js",
     "build": "tsc",
+    "postinstall": "prisma generate",
     "build-start": "tsc && tsc-alias && node -r tsconfig-paths/register build/index.js",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",

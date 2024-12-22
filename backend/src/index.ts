@@ -33,13 +33,14 @@ app.use(cookieParser());
 // 정적 파일 제공 (React 빌드 결과 & Multer 업로드 파일)
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
+
 // API 라우트 설정
-app.use('/api/auth', authRouter);
-app.use('/api/jwt', jwtRouter);
+app.use('/api', authRouter);
+app.use('/api', jwtRouter);
+app.use('/api', userRouter);
 app.use('/api/chat', chatRouter);
 app.use('/api/activity', activityRouter);
 app.use('/api/friend', friendRouter);
-app.use('/api/user', userRouter);
 
 // 에러 핸들러
 app.use((err: any, req: Request, res: Response, next: Function) => {

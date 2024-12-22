@@ -26,12 +26,12 @@ app.use((0, cookie_parser_1.default)());
 // 정적 파일 제공 (React 빌드 결과 & Multer 업로드 파일)
 app.use('/public', express_1.default.static(path_1.default.join(__dirname, 'public')));
 // API 라우트 설정
-app.use('/api/auth', routes_1.authRouter);
-app.use('/api/jwt', routes_1.jwtRouter);
+app.use('/api', routes_1.authRouter);
+app.use('/api', routes_1.jwtRouter);
+app.use('/api', routes_1.userRouter);
 app.use('/api/chat', routes_1.chatRouter);
 app.use('/api/activity', routes_1.activityRouter);
 app.use('/api/friend', routes_1.friendRouter);
-app.use('/api/user', routes_1.userRouter);
 // 에러 핸들러
 app.use((err, req, res, next) => {
     console.error(err.stack);
