@@ -81,7 +81,7 @@ export const ActivityDetailPage = () => {
 
 const DetailView = styled.div`
   width: 100%;
-  height: calc(100vh - 56px - 116px);
+  height: calc(100svh - 56px - 116px);
   overflow-y: auto;
   padding: 16px;
 

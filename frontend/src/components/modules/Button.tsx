@@ -18,6 +18,7 @@ const ButtonStyle = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 6px;
+  color: ${COLORS.BLACK500};
 
   background-color: ${COLORS.YELLOW500};
 `

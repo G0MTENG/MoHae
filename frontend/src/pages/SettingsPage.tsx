@@ -1,7 +1,7 @@
 import { BMJua, Favicon, Header, Icons } from '@/components/atoms'
 import { Button, Info, Modal } from '@/components/modules'
 import { List } from '@/components/templates'
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/constants'
+import { ACCESS_TOKEN, COLORS, REFRESH_TOKEN } from '@/constants'
 import { useModal } from '@/hooks'
 import { useFetchUserInfo } from '@/hooks/queries/useUser'
 import { useNavigate } from 'react-router-dom'
@@ -30,9 +30,14 @@ export const SettingsPage = () => {
     open()
   }
 
-  const copy = () => {
-    navigator.clipboard.writeText(randomCode)
-    alert('복사되었습니다!')
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(randomCode)
+      alert('복사되었습니다!')
+    } catch (error) {
+      alert('복사에 실패했습니다.')
+      console.error(error)
+    }
   }
 
   return (
@@ -90,6 +95,8 @@ const Row = styled.button`
   display: flex;
   gap: 16px;
   cursor: pointer;
+
+  color: ${COLORS.BLACK500};
 `
 
 const Hr = styled.hr`

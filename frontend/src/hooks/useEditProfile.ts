@@ -39,6 +39,8 @@ export const useEditProfile = () => {
     editProfile(formData)
   }
 
+  console.log(formProps.formState.errors)
+
   return {
     onSubmit,
     user: userInfo,

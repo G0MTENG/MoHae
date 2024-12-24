@@ -21,7 +21,7 @@ const ActivityContainer = styled.div`
   max-width: 360px;
   margin: 0 auto;
   padding: 16px 24px;
-  background-color: ${COLORS.YELLOW500};
+  background-color: ${COLORS.YELLOW100};
   display: flex;
   flex-direction: column;
   gap: 16px;

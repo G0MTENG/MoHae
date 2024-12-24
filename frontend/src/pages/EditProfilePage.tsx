@@ -21,7 +21,10 @@ export const EditProfilePage = () => {
     <>
       <Header>
         <S.HeaderItem>
-          <IconButton onClick={() => navigate(-1)} icon={<Icons.ARROW_LEFT size={24} />} />
+          <IconButton
+            onClick={() => navigate(-1)}
+            icon={<Icons.ARROW_LEFT color={COLORS.BLACK500} size={24} />}
+          />
         </S.HeaderItem>
         <BMJua.Body>프로필 수정</BMJua.Body>
         <S.HeaderItem>

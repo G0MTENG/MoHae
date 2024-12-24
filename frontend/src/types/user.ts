@@ -1,7 +1,9 @@
 import * as z from 'zod'
 import { EditUserInfoSchema } from '@/schemas'
 
-export type EditUserInfoSchemaType = z.infer<typeof EditUserInfoSchema>
+export type EditUserInfoSchemaType = z.infer<typeof EditUserInfoSchema> & {
+  avatar?: File
+}
 
 interface User {
   id: number

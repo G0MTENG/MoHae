@@ -39,7 +39,7 @@ export const AddFriendsPage = () => {
 
         <List
           style={{
-            height: 'calc(100vh - 260px)',
+            height: 'calc(100svh - 260px)',
             overflowY: 'auto',
           }}
         >

@@ -10,7 +10,7 @@ const ApplicationContainer = styled.div`
   width: 100%;
   min-width: 320px;
   max-width: 600px;
-  height: 100vh;
+  height: 100svh;
 
   position: relative;
 

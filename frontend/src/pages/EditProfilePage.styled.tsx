@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const HeaderItem = styled.div`
-  width: 40px;
+  width: 60px;
   height: 24px;
   display: flex;
   justify-content: center;

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const List = styled.ul`
   width: 100%;
-  height: 100vh - 56px;
+  height: 100svh - 56px;
   overflow-y: auto;
   padding: 16px;
   display: flex;

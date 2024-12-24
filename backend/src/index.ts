@@ -25,6 +25,7 @@ const server = http.createServer(app);
 // 보안 및 기본 설정
 app.use(morgan('combined'));
 app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

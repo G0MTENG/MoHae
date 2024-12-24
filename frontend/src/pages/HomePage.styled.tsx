@@ -21,7 +21,7 @@ export const MyContainer = styled.div`
 
 export const Container = styled.div`
   width: 100%;
-  height: calc(100vh - 138px);
+  height: calc(100svh - 138px);
   padding: 16px;
   display: flex;
   flex-direction: column;

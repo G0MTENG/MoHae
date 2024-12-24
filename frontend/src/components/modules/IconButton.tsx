@@ -1,3 +1,4 @@
+import { COLORS } from '@/constants'
 import styled from 'styled-components'
 
 type NativeButtonProps = React.DetailedHTMLProps<
@@ -8,12 +9,17 @@ interface IconButtonProps extends NativeButtonProps {
   icon: React.ReactElement
 }
 
-const IconButtonStyle = styled.button`
+const IconButtonStyle = styled.button<{ color: string }>`
   background: none;
   border: none;
   cursor: pointer;
+  color: ${({ color }) => color};
 `
 
 export const IconButton = ({ icon, ...props }: IconButtonProps) => {
-  return <IconButtonStyle {...props}>{icon}</IconButtonStyle>
+  return (
+    <IconButtonStyle color={COLORS.BLACK500} {...props}>
+      {icon}
+    </IconButtonStyle>
+  )
 }
