@@ -9,6 +9,7 @@ export * from './useEditProfile'
 export * from './useInitChatRoom'
 export * from './useInitChatRoomSocket'
 export * from './useChat'
+export * from './useSplash'
 
 // quries
 export * from './queries/useAuth'
