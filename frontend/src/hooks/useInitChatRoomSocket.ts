@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN } from '@/constants'
+import { ACCESS_TOKEN, NAVIGATE } from '@/constants'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { io } from 'socket.io-client'
@@ -12,7 +12,7 @@ export const useInitChatRoomSocket = () => {
     const JWT = localStorage.getItem(ACCESS_TOKEN)
 
     if (!JWT) {
-      navigate('/sign-in')
+      navigate(NAVIGATE.SIGN_IN)
     }
 
     socket.emit('join', { JWT, roomId: Number(id) })

@@ -1,24 +1,36 @@
 import { useEffect } from 'react'
-import * as S from './Splash.styled'
 import { Favicon, Title } from '@/components/atoms'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import { NAVIGATE } from '@/constants'
+
+export const Container = styled.div`
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+`
 
 export const SplashPage = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('sign-in')
+      navigate(NAVIGATE.SIGN_IN)
     }, 2000)
 
     return () => {
       clearTimeout(timer)
     }
   }, [navigate])
+
   return (
-    <S.Container>
+    <Container>
       <Favicon />
       <Title.Medium />
-    </S.Container>
+    </Container>
   )
 }

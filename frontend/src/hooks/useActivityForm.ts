@@ -6,6 +6,7 @@ import { useCreateActivity, useFetchDetailActivity, useUpdateActivity } from './
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import { NAVIGATE } from '@/constants'
 
 export const useActivityForm = (type: 'create' | 'update', detailId?: number) => {
   const { data: detailData } = useFetchDetailActivity(detailId)
@@ -17,7 +18,7 @@ export const useActivityForm = (type: 'create' | 'update', detailId?: number) =>
     queryClient.invalidateQueries({
       queryKey: ['activity', 'detail'],
     })
-    navigate(-1)
+    navigate(NAVIGATE.BACK)
   }
 
   const { mutate: createMutate } = useCreateActivity({ onSuccess })

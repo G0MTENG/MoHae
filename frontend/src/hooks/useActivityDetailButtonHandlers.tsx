@@ -3,10 +3,11 @@ import { useDeleteActivity } from './queries/useActivity'
 import { BMJua, Favicon } from '@/components/atoms'
 import styled from 'styled-components'
 import { Button } from '@/components/modules'
+import { NAVIGATE } from '@/constants'
 
 export const useActivityDetailButtonHandlers = () => {
   const { mutate, isSuccess } = useDeleteActivity()
-  const navigator = useNavigate()
+  const navigate = useNavigate()
 
   const Modals = {
     DELETE: ({ detailId, close }: { detailId: number; close: VoidFunction }) => (
@@ -26,7 +27,7 @@ export const useActivityDetailButtonHandlers = () => {
         <Button
           onClick={() => {
             close()
-            navigator(-1)
+            navigate(NAVIGATE.BACK)
           }}
         >
           확인
@@ -40,13 +41,13 @@ export const useActivityDetailButtonHandlers = () => {
   }
 
   const handleUpdate = (id: number) => {
-    navigator(`/update/${id}`)
+    navigate(NAVIGATE.UPDATE_ACTIVITY(id))
   }
 
   const handleChat = (id?: number) => {
     if (!id) return
 
-    navigator(`/chat/${id}`)
+    navigate(NAVIGATE.CHAT_ROOM(id))
   }
 
   const handlers = {

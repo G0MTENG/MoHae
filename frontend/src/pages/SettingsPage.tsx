@@ -1,7 +1,7 @@
 import { BMJua, Favicon, Header, Icons } from '@/components/atoms'
 import { Button, Info, Modal } from '@/components/modules'
 import { List } from '@/components/templates'
-import { ACCESS_TOKEN, COLORS, REFRESH_TOKEN } from '@/constants'
+import { ACCESS_TOKEN, COLORS, NAVIGATE, REFRESH_TOKEN } from '@/constants'
 import { useModal } from '@/hooks'
 import { useFetchUserInfo } from '@/hooks/queries/useUser'
 import { useNavigate } from 'react-router-dom'
@@ -17,13 +17,13 @@ export const SettingsPage = () => {
   const { username, randomCode } = userData
 
   const handleClickEditProfile = () => {
-    navigate('/edit-profile')
+    navigate(NAVIGATE.EDIT_PROFILE)
   }
 
   const handleClickSignOut = () => {
     localStorage.removeItem(ACCESS_TOKEN)
     localStorage.removeItem(REFRESH_TOKEN)
-    navigate('/sign-in')
+    navigate(NAVIGATE.SIGN_IN)
   }
 
   const handleClickConfirmCode = () => {

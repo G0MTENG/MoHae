@@ -7,7 +7,6 @@ import { ROUTES } from '@/constants'
 export const SignInPage = () => {
   const {
     register,
-    handleSubmit,
     onSubmit,
     formState: { errors },
   } = useSignInForm()
@@ -31,7 +30,7 @@ export const SignInPage = () => {
           error={errors?.password?.message}
         />
       </S.Form>
-      <Button type='submit' onClick={handleSubmit(onSubmit)}>
+      <Button type='submit' onClick={onSubmit}>
         로그인
       </Button>
       <S.NavLinks>

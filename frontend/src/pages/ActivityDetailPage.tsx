@@ -1,13 +1,13 @@
 import { BMJua, Emoji, EmptyUser, Header, Icons } from '@/components/atoms'
 import { Button, Modal } from '@/components/modules'
 import { ImageSlider } from '@/components/modules'
-import { COLORS } from '@/constants'
+import { COLORS, NAVIGATE } from '@/constants'
 import { useFetchDetailActivity, useActivityDetailButtonHandlers, useModal } from '@/hooks'
 import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const ActivityDetailPage = () => {
-  const navigator = useNavigate()
+  const navigate = useNavigate()
   const { id: activityId } = useParams()
   const { data: activityData } = useFetchDetailActivity(Number(activityId))
   const { isOpen, open, close } = useModal()
@@ -29,7 +29,7 @@ export const ActivityDetailPage = () => {
           style={{
             cursor: 'pointer',
           }}
-          onClick={() => navigator(-1)}
+          onClick={() => navigate(NAVIGATE.BACK)}
           color={COLORS.BLACK}
           size={24}
         />

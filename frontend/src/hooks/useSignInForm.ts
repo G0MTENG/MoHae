@@ -17,7 +17,7 @@ export const useSignInForm = () => {
   }
 
   return {
-    onSubmit,
+    onSubmit: formProps.handleSubmit(onSubmit),
     ...formProps,
   }
 }

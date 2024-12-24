@@ -2,6 +2,7 @@ import * as S from './AddFriendsPage.styled'
 import { Header, Icons } from '@/components/atoms'
 import { Button, Info, Input } from '@/components/modules'
 import { List } from '@/components/templates'
+import { NAVIGATE } from '@/constants'
 import { useDeleteFriend, useFetchFriends } from '@/hooks'
 import { useAddFriends } from '@/hooks/useAddFriends'
 import { useNavigate } from 'react-router-dom'
@@ -26,7 +27,11 @@ export const AddFriendsPage = () => {
   return (
     <>
       <Header>
-        <Icons.ARROW_LEFT style={{ cursor: 'pointer' }} onClick={() => navigate(-1)} size={24} />
+        <Icons.ARROW_LEFT
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate(NAVIGATE.BACK)}
+          size={24}
+        />
       </Header>
 
       <S.Container>

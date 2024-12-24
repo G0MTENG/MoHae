@@ -2,7 +2,7 @@ import { BMJua, Header, Icons } from '@/components/atoms'
 import * as S from './EditProfilePage.styled'
 import { EditAvatar, IconButton, Input, TextButton } from '@/components/modules'
 import { useNavigate } from 'react-router-dom'
-import { COLORS } from '@/constants'
+import { COLORS, NAVIGATE } from '@/constants'
 import { useEditProfile } from '@/hooks'
 
 export const EditProfilePage = () => {
@@ -22,7 +22,7 @@ export const EditProfilePage = () => {
       <Header>
         <S.HeaderItem>
           <IconButton
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(NAVIGATE.BACK)}
             icon={<Icons.ARROW_LEFT color={COLORS.BLACK500} size={24} />}
           />
         </S.HeaderItem>

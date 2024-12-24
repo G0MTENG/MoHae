@@ -5,13 +5,14 @@ import { EditUserInfoSchema } from '@/schemas'
 import type { EditUserInfoSchemaType } from '@/types'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { NAVIGATE } from '@/constants'
 
 export const useEditProfile = () => {
   const { data: userInfo } = useFetchUserInfo()
-  const navigator = useNavigate()
+  const navigate = useNavigate()
   const { mutate: editProfile } = useEditUserProfile({
     onSuccess: () => {
-      navigator(-1)
+      navigate(NAVIGATE.BACK)
     },
   })
   const formProps = useForm<EditUserInfoSchemaType>({

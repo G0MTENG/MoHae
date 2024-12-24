@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN } from '@/constants'
+import { ACCESS_TOKEN, NAVIGATE } from '@/constants'
 import { Chat, Friend } from '@/types'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -31,7 +31,7 @@ export const useChat = () => {
 
     const JWT = localStorage.getItem(ACCESS_TOKEN)
     if (!JWT) {
-      navigate('/sign-in')
+      navigate(NAVIGATE.SIGN_IN)
       return
     }
 

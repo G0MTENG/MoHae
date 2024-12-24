@@ -5,9 +5,10 @@ import { ActivityBubble } from '@/components/modules/ActivityBubble'
 import { useUserInfoWithRecent } from '@/hooks/useUserInfoWithRecent'
 import { useFetchFriendsRecentActivity } from '@/hooks'
 import { Info } from '@/components/modules'
+import { NAVIGATE } from '@/constants'
 
 export const FriendsPage = () => {
-  const navigator = useNavigate()
+  const navigate = useNavigate()
   const userInfoWithRecent = useUserInfoWithRecent()
   const { data: friendsData } = useFetchFriendsRecentActivity()
 
@@ -20,7 +21,7 @@ export const FriendsPage = () => {
         </S.HeaderContainer>
         <S.HeaderContainer>
           <Icons.FRIEND_ADD
-            onClick={() => navigator('/friends/add')}
+            onClick={() => navigate(NAVIGATE.ADD_FRIENDS)}
             style={{
               cursor: 'pointer',
             }}

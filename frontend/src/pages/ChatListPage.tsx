@@ -1,7 +1,7 @@
 import { Info } from '@/components/modules'
 import * as S from './ChatListPage.styled'
 import { BMJua, Emoji, EmptyUser, Header, Icons } from '@/components/atoms'
-import { COLORS } from '@/constants'
+import { COLORS, NAVIGATE } from '@/constants'
 import { useFetchChatList } from '@/hooks'
 import { FriendChatListItem } from '@/types'
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +18,11 @@ export const ChatListPage = () => {
   return (
     <>
       <Header>
-        <Icons.ARROW_LEFT style={{ cursor: 'pointer' }} onClick={() => navigate(-1)} size={24} />
+        <Icons.ARROW_LEFT
+          style={{ cursor: 'pointer' }}
+          onClick={() => navigate(NAVIGATE.BACK)}
+          size={24}
+        />
       </Header>
       {isLoading || isError ? (
         <Info>{'친구의 활동을 보고\n채팅을 시작하세요!'}</Info>

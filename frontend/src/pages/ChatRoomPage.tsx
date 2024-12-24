@@ -2,6 +2,7 @@ import * as S from './ChatRoomPage.styled'
 import { BMJua, Emoji, Header, Icons } from '@/components/atoms'
 import { IconButton } from '@/components/modules'
 import { Chat } from '@/components/templates'
+import { NAVIGATE } from '@/constants'
 import { useChat } from '@/hooks'
 import { extractDate } from '@/utils'
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +19,7 @@ export const ChatRoomPage = () => {
             style={{
               padding: '0',
             }}
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(NAVIGATE.BACK)}
             icon={<Icons.ARROW_LEFT size={24} />}
           />
           <BMJua.H5>{friend?.username ?? ''}</BMJua.H5>
