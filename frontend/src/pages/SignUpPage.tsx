@@ -1,5 +1,5 @@
 import { Button, Input, NavLink } from '@/components/modules'
-import * as S from './SignUpPage.styled'
+import * as S from './SignInUpPage.styled'
 import { Title } from '@/components/atoms'
 import { useSignUpForm } from '@/hooks'
 import { ROUTES } from '@/constants'
