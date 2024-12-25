@@ -8,13 +8,17 @@ interface ImageSliderProps {
 }
 
 export const ImageSlider = ({ images }: ImageSliderProps) => {
-  const { image, next, prev } = useSlider({ images })
+  const { image, next, prev, number } = useSlider({ images })
 
   return (
     <Container>
-      <Icons.ARROW_LEFT onClick={prev} className='prev button' color={COLORS.WHITE} size={24} />
+      {number !== 0 && (
+        <Icons.ARROW_LEFT onClick={prev} className='prev button' color={COLORS.WHITE} size={24} />
+      )}
       <Image src={image} alt='slider' />
-      <Icons.ARROW_RIGHT onClick={next} className='next button' color={COLORS.WHITE} size={24} />
+      {number !== images.length - 1 && (
+        <Icons.ARROW_RIGHT onClick={next} className='next button' color={COLORS.WHITE} size={24} />
+      )}
     </Container>
   )
 }

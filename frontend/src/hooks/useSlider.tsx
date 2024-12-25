@@ -18,6 +18,7 @@ export const useSlider = ({ images }: UseSliderProps) => {
 
   return {
     image: images[state],
+    number: state,
     next,
     prev,
   }
