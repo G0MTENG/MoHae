@@ -44,14 +44,14 @@ export const Router = () => {
         {/* 추가 페이지 */}
         <Route path={ROUTES.ADD} element={<AddPage />} />
 
+        {/* update activity */}
+        <Route path={ROUTES.UPDATE_ACTIVITY} element={<UpdateActivityPage />} />
+
         {/* 활동 디테일 */}
         <Route path={ROUTES.ACTIVITY} element={<ActivityDetailPage />} />
 
         {/* edit profile */}
         <Route path={ROUTES.EDIT_PROFILE} element={<EditProfilePage />} />
-
-        {/* update activity */}
-        <Route path={ROUTES.UPDATE_ACTIVITY} element={<UpdateActivityPage />} />
 
         {/* add friends */}
         <Route path={ROUTES.ADD_FRIENDS} element={<AddFriendsPage />} />

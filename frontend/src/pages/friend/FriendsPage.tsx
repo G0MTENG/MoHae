@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import * as S from './HomePage.styled'
+import * as S from '../home/HomePage.styled'
 import { Favicon, Header, Icons, Title } from '@/components/atoms'
 import { ActivityBubble } from '@/components/modules/ActivityBubble'
 import { useUserInfoWithRecent } from '@/hooks/useUserInfoWithRecent'
