@@ -29,6 +29,7 @@ Front-End
 - axios
 - react router dom
 - styled components
+- zustand
 - yarn
 
 Back-End
@@ -48,3 +49,10 @@ Infra
 #### 프로젝트 구조
 
 ![인프라](./images/infra.png)
+
+#### 투두
+
+- [ ] 전역 Modal 개발
+- [ ] react hook form 리펙토링
+- [ ] find password 페이지 개발
+- [ ] React Native Expo 앱 개발
