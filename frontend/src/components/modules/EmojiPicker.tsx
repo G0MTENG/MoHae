@@ -1,12 +1,19 @@
 import styled from 'styled-components'
 import { BMJua, Emoji } from '../atoms'
 import { EMOJI } from '@/constants'
+import React from 'react'
+import { UseFormSetValue } from 'react-hook-form'
+import { ActivitySchemaType } from '@/types'
 
 interface EmojiPickerProps {
-  onSelect: (emoji: string) => void
+  set: UseFormSetValue<ActivitySchemaType>
 }
 
-export const EmojiPicker = ({ onSelect }: EmojiPickerProps) => {
+export const EmojiPicker = React.memo(({ set }: EmojiPickerProps) => {
+  const handleSelectEmoji = (emoji: string) => {
+    set('emoji', emoji)
+  }
+
   return (
     <Container>
       {EMOJI.map(({ title, emojis }, index) => (
@@ -14,7 +21,7 @@ export const EmojiPicker = ({ onSelect }: EmojiPickerProps) => {
           <BMJua.H5>{title}</BMJua.H5>
           <Emojis>
             {emojis.map((emoji) => (
-              <button key={emoji} onClick={() => onSelect(emoji)}>
+              <button key={emoji} onClick={() => handleSelectEmoji(emoji)}>
                 <Emoji>{emoji}</Emoji>
               </button>
             ))}
@@ -23,7 +30,7 @@ export const EmojiPicker = ({ onSelect }: EmojiPickerProps) => {
       ))}
     </Container>
   )
-}
+})
 
 const Container = styled.div`
   width: 100%;

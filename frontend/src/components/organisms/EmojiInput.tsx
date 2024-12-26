@@ -1,21 +1,17 @@
 import { useModal } from '@/hooks'
-import { Button, EmojiPicker, Modal } from '../modules'
+import { Button, Modal } from '../modules'
 import { BMJua, Emoji } from '../atoms'
 import styled from 'styled-components'
 import { COLORS } from '@/constants'
-import { UseFormSetValue, UseFormWatch } from 'react-hook-form'
-import type { ActivitySchemaType } from '@/types'
+import { useFormContext } from 'react-hook-form'
 
 interface EmojiInputProps {
-  watch: UseFormWatch<ActivitySchemaType>
-  setValue: UseFormSetValue<ActivitySchemaType>
+  picker: React.ReactElement
 }
 
-export const EmojiInput = ({ watch, setValue }: EmojiInputProps) => {
+export const EmojiInput = ({ picker }: EmojiInputProps) => {
+  const { watch } = useFormContext()
   const { isOpen, open, close } = useModal()
-  const handleSelectEmoji = (emoji: string) => {
-    setValue('emoji', emoji)
-  }
   const emoji = watch('emoji')
 
   return (
@@ -38,7 +34,7 @@ export const EmojiInput = ({ watch, setValue }: EmojiInputProps) => {
             <Emoji>{emoji}</Emoji>
           </Preview>
 
-          <EmojiPicker onSelect={handleSelectEmoji} />
+          {picker}
 
           <Button onClick={close}>선택하기</Button>
         </Modal>

@@ -1,18 +1,17 @@
 import { ActivitySchemaType } from '@/types'
-import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { BMJua } from '../atoms'
 import { COLORS } from '@/constants'
 import styled from 'styled-components'
 import { ImageInput, PrewviewPhotos } from '../modules'
 
-interface PhotoInputProps {
-  watch: UseFormWatch<ActivitySchemaType>
-  register: UseFormRegister<ActivitySchemaType>
-  setValue: UseFormSetValue<ActivitySchemaType>
-  error?: string
-}
-
-export const PhotoInput = ({ watch, register, setValue, error }: PhotoInputProps) => {
+export const PhotoInput = () => {
+  const {
+    watch,
+    register,
+    setValue,
+    formState: { errors },
+  } = useFormContext<ActivitySchemaType>()
   const photos = watch('images') || []
 
   return (
@@ -21,7 +20,7 @@ export const PhotoInput = ({ watch, register, setValue, error }: PhotoInputProps
         사진
       </BMJua.Body>
       <BMJua.Caption style={{ color: COLORS.RED500, paddingLeft: '2px' }}>
-        {error ?? ''}
+        {errors.images?.message ?? ''}
       </BMJua.Caption>
       <Previews>
         <ImageInput register={register} photos={photos} setValue={setValue} />
