@@ -1,6 +1,29 @@
 import styled from 'styled-components'
 import { BMJua, Emoji } from '../atoms'
-import { EMOJI_KEYS, emojiName, emojis } from '@/constants/emojis'
+import { EMOJI } from '@/constants'
+
+interface EmojiPickerProps {
+  onSelect: (emoji: string) => void
+}
+
+export const EmojiPicker = ({ onSelect }: EmojiPickerProps) => {
+  return (
+    <Container>
+      {EMOJI.map(({ title, emojis }, index) => (
+        <div key={index}>
+          <BMJua.H5>{title}</BMJua.H5>
+          <Emojis>
+            {emojis.map((emoji) => (
+              <button key={emoji} onClick={() => onSelect(emoji)}>
+                <Emoji>{emoji}</Emoji>
+              </button>
+            ))}
+          </Emojis>
+        </div>
+      ))}
+    </Container>
+  )
+}
 
 const Container = styled.div`
   width: 100%;
@@ -14,49 +37,28 @@ const Container = styled.div`
   padding: 16px;
 `
 
-const EmojiContainer = styled.div`
-  margin-top: 16px;
-  display: flex;
-  flex-wrap: wrap;
+const Emojis = styled.div`
+  margin: 16px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
   gap: 12px;
-  justify-content: center;
+  justify-items: center;
   align-items: center;
-`
 
-const EmojiButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
+  & > button {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    font-size: 24px;
 
-  &:focus {
-    outline: none;
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
-
-  &:hover {
-    transform: scale(1.2);
-  }
 `
-
-interface EmojiPickerProps {
-  onSelect: (emoji: string) => void
-}
-
-export const EmojiPicker = ({ onSelect }: EmojiPickerProps) => {
-  return (
-    <Container>
-      {Object.keys(EMOJI_KEYS).map((key) => (
-        <div key={key}>
-          <BMJua.H5>{emojiName[key]}</BMJua.H5>
-          <EmojiContainer>
-            {emojis[key].split(' ').map((emoji) => (
-              <EmojiButton key={emoji} onClick={() => onSelect(emoji)}>
-                <Emoji>{emoji}</Emoji>
-              </EmojiButton>
-            ))}
-          </EmojiContainer>
-        </div>
-      ))}
-    </Container>
-  )
-}
