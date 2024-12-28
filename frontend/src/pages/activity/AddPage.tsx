@@ -4,6 +4,7 @@ import { Header } from '@/components/atoms/Header'
 import { IconButton, TextButton } from '@/components/modules'
 import { ActivityForm } from '@/components/templates'
 import { COLORS, NAVIGATE } from '@/constants'
+import { ISWEBVIEW } from '@/constants/webview'
 import { useActivityForm } from '@/hooks'
 import { useNavigate } from 'react-router-dom'
 
@@ -15,10 +16,12 @@ export const AddPage = () => {
     <>
       <Header>
         <S.HeaderItem>
-          <IconButton
-            onClick={() => navigate(NAVIGATE.BACK)}
-            icon={<Icons.ARROW_LEFT size={24} />}
-          />
+          {ISWEBVIEW || (
+            <IconButton
+              onClick={() => navigate(NAVIGATE.BACK)}
+              icon={<Icons.ARROW_LEFT size={24} />}
+            />
+          )}
         </S.HeaderItem>
         <BMJua.Body>나의 활동</BMJua.Body>
         <S.HeaderItem>

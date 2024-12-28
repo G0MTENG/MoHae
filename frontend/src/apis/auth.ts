@@ -10,7 +10,10 @@ import { api } from './api'
 
 export const signIn = async (data: SignInRequest) => {
   const response = await api.post<SignInResponse>('/sign-in', data)
-  return response.data
+  return {
+    auth: data,
+    data: response.data,
+  }
 }
 
 export const signUp = async (data: SignUpRequest) => {

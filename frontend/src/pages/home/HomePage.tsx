@@ -3,8 +3,12 @@ import * as S from './HomePage.styled'
 import { Favicon, Header, Icons, Title } from '@/components/atoms'
 import { ROUTES } from '@/constants'
 import { RecentActivityView } from '@/components/templates'
+import { useReceiveFromRN, useReceiveTokensFromRN } from '@/hooks'
 
 export const HomePage = () => {
+  const { handler } = useReceiveTokensFromRN()
+  useReceiveFromRN(handler)
+
   return (
     <>
       <Header>
