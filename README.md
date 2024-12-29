@@ -32,6 +32,9 @@ Front-End
 - zustand
 - yarn
 
+Mobile Application
+- React Native Expo
+
 Back-End
 - TypeScript
 - Express
@@ -49,6 +52,11 @@ Infra
 #### 프로젝트 구조
 
 ![인프라](./images/infra.png)
+
+
+#### ERD
+
+![ERD](./images/erd.png)
 
 #### 투두
 
